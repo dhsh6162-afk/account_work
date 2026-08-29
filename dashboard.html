@@ -1,342 +1,701 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+<title>Dashboard - Account Funds</title>
 
-  <title>Dashboard - Account Funds</title>
-
-  <style>
+<style>
 
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
     }
 
     body {
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, #07111f, #142b4a);
-      color: white;
+        background: #f4f6f9;
+        color: #1f2937;
     }
 
-    .container {
-      width: 100%;
-      max-width: 500px;
-      margin: auto;
-      padding: 25px 15px;
-    }
 
-    .header {
-      text-align: center;
-      margin-bottom: 25px;
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    .navbar {
+        background: #1f2937;
+        color: white;
+        padding: 16px 8%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .logo {
-      width: 70px;
-      height: 70px;
-      margin: 0 auto 15px;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      border-radius: 50%;
-
-      background: linear-gradient(135deg, #1976e8, #6046e8);
-
-      font-size: 23px;
-      font-weight: bold;
+        font-size: 23px;
+        font-weight: bold;
     }
 
-    .header h1 {
-      font-size: 26px;
-      margin-bottom: 8px;
+    .nav-links {
+        display: flex;
+        gap: 20px;
+        align-items: center;
     }
 
-    .header p {
-      color: #9caec4;
-      font-size: 13px;
-      letter-spacing: 1px;
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 15px;
     }
 
-    .welcome-card {
-      background: #0d1828;
-      border: 1px solid #294766;
-
-      border-radius: 20px;
-      padding: 22px;
-
-      margin-bottom: 18px;
-    }
-
-    .welcome-card h2 {
-      font-size: 21px;
-      margin-bottom: 10px;
-    }
-
-    #usernameDisplay {
-      color: #6eafff;
-    }
-
-    .welcome-card p {
-      color: #aab9cc;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .balance-card {
-      background: linear-gradient(135deg, #1976e8, #6046e8);
-
-      border-radius: 20px;
-
-      padding: 25px;
-      margin-bottom: 20px;
-    }
-
-    .balance-title {
-      font-size: 13px;
-      opacity: 0.85;
-      margin-bottom: 8px;
-    }
-
-    .balance {
-      font-size: 34px;
-      font-weight: bold;
-    }
-
-    .menu-card {
-      background: #0d1828;
-      border: 1px solid #294766;
-
-      border-radius: 20px;
-
-      padding: 12px;
-      margin-bottom: 18px;
-    }
-
-    .menu-btn {
-      width: 100%;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      padding: 18px;
-
-      margin-bottom: 8px;
-
-      text-decoration: none;
-
-      border-radius: 12px;
-
-      background: #121f32;
-      border: 1px solid #294766;
-
-      color: white;
-
-      font-size: 16px;
-
-      cursor: pointer;
-    }
-
-    .menu-btn:last-child {
-      margin-bottom: 0;
-    }
-
-    .menu-btn:hover {
-      border-color: #2586ff;
+    .nav-links a:hover {
+        opacity: 0.8;
     }
 
     .logout-btn {
-      width: 100%;
-
-      padding: 15px;
-
-      border: 1px solid #ff5c5c;
-
-      border-radius: 12px;
-
-      background: transparent;
-
-      color: #ff7777;
-
-      font-size: 16px;
-      font-weight: bold;
-
-      cursor: pointer;
+        background: #ef4444;
+        padding: 9px 15px;
+        border-radius: 7px;
     }
 
-  </style>
+
+    /* =========================
+       MAIN CONTAINER
+    ========================= */
+
+    .container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 35px 20px;
+    }
+
+    .welcome {
+        margin-bottom: 30px;
+    }
+
+    .welcome h1 {
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+
+    .welcome p {
+        color: #6b7280;
+    }
+
+
+    /* =========================
+       BALANCE CARD
+    ========================= */
+
+    .balance-card {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+    }
+
+    .balance-card p {
+        opacity: 0.9;
+        margin-bottom: 10px;
+    }
+
+    .balance {
+        font-size: 38px;
+        font-weight: bold;
+    }
+
+
+    /* =========================
+       DASHBOARD GRID
+    ========================= */
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+        transition: 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-icon {
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+
+    .card h3 {
+        margin-bottom: 10px;
+    }
+
+    .card p {
+        color: #6b7280;
+        line-height: 1.5;
+        margin-bottom: 18px;
+    }
+
+    .card a {
+        display: inline-block;
+        background: #2563eb;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 7px;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .card a:hover {
+        background: #1d4ed8;
+    }
+
+
+    /* =========================
+       RECENT TRANSACTIONS
+    ========================= */
+
+    .transactions {
+        background: white;
+        margin-top: 30px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+    }
+
+    .transactions-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .transactions-header a {
+        text-decoration: none;
+        color: #2563eb;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .transaction-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .transaction-item:last-child {
+        border-bottom: none;
+    }
+
+    .transaction-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .transaction-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: #eff6ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .transaction-title {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .transaction-date {
+        color: #6b7280;
+        font-size: 13px;
+    }
+
+    .amount {
+        font-weight: bold;
+        color: #16a34a;
+    }
+
+    .empty-message {
+        text-align: center;
+        padding: 30px;
+        color: #6b7280;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+        text-align: center;
+        padding: 25px;
+        margin-top: 30px;
+        color: #6b7280;
+        font-size: 14px;
+    }
+
+
+    /* =========================
+       MOBILE RESPONSIVE
+    ========================= */
+
+    @media (max-width: 850px) {
+
+        .dashboard-grid {
+            grid-template-columns: 1fr;
+        }
+
+    }
+
+
+    @media (max-width: 650px) {
+
+        .navbar {
+            flex-direction: column;
+            gap: 15px;
+            padding: 18px;
+        }
+
+        .nav-links {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .container {
+            padding: 25px 15px;
+        }
+
+        .welcome h1 {
+            font-size: 24px;
+        }
+
+        .balance {
+            font-size: 32px;
+        }
+
+        .transaction-item {
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+    }
+
+</style>
+```
+
 </head>
 
 <body>
 
-  <div class="container">
+```
+<!-- =========================
+     NAVBAR
+========================== -->
 
-    <div class="header">
+<nav class="navbar">
 
-      <div class="logo">
-        AF
-      </div>
+    <div class="logo">
+        Account Funds
+    </div>
 
-      <h1>ACCOUNT FUNDS</h1>
 
-      <p>YOUR DASHBOARD</p>
+    <div class="nav-links">
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="payment.html">
+            Add Funds
+        </a>
+
+        <a href="history.html">
+            Transaction History
+        </a>
+
+        <a href="profile.html">
+            My Profile
+        </a>
+
+        <a
+            href="index.html"
+            class="logout-btn"
+            onclick="logout()"
+        >
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     MAIN DASHBOARD
+========================== -->
+
+<div class="container">
+
+
+    <!-- Welcome -->
+
+    <div class="welcome">
+
+        <h1>
+            Welcome,
+            <span id="userName">
+                User
+            </span>
+            👋
+        </h1>
+
+        <p>
+            Manage your account and funds from your dashboard.
+        </p>
 
     </div>
 
 
-    <!-- WELCOME -->
 
-    <div class="welcome-card">
-
-      <h2>
-        Welcome,
-        <span id="usernameDisplay">User</span> 👋
-      </h2>
-
-      <p>
-        Welcome to your Account Funds dashboard.
-        Manage your account and payments from here.
-      </p>
-
-    </div>
-
-
-    <!-- BALANCE -->
+    <!-- Balance -->
 
     <div class="balance-card">
 
-      <div class="balance-title">
-        AVAILABLE BALANCE
-      </div>
+        <p>
+            Available Balance
+        </p>
 
-      <div class="balance">
-        ₹0.00
-      </div>
-
-    </div>
-
-
-    <!-- MENU -->
-
-    <div class="menu-card">
-
-      <a
-        href="payment.html"
-        class="menu-btn">
-
-        <span>💳 Deposit / Payment</span>
-
-        <span>›</span>
-
-      </a>
-
-
-      <button
-        class="menu-btn"
-        type="button"
-        onclick="comingSoon()">
-
-        <span>📜 Transaction History</span>
-
-        <span>›</span>
-
-      </button>
-
-
-      <button
-        class="menu-btn"
-        type="button"
-        onclick="comingSoon()">
-
-        <span>👤 My Profile</span>
-
-        <span>›</span>
-
-      </button>
+        <div
+            class="balance"
+            id="balance"
+        >
+            ₹0.00
+        </div>
 
     </div>
 
 
-    <!-- LOGOUT -->
 
-    <button
-      type="button"
-      class="logout-btn"
-      onclick="logout()">
+    <!-- Dashboard Cards -->
 
-      Logout
-
-    </button>
-
-  </div>
+    <div class="dashboard-grid">
 
 
-  <script>
+        <!-- Add Funds -->
 
-    // CHECK LOGIN
+        <div class="card">
 
-    const savedData =
-      localStorage.getItem("account_funds_user");
+            <div class="card-icon">
+                💳
+            </div>
+
+            <h3>
+                Add Funds
+            </h3>
+
+            <p>
+                Add money to your account using the available payment option.
+            </p>
+
+            <a href="payment.html">
+                Add Funds
+            </a>
+
+        </div>
 
 
-    if (!savedData) {
 
-      window.location.href =
-        "index.html";
+        <!-- Transaction History -->
 
-    } else {
+        <div class="card">
 
-      const userData =
-        JSON.parse(savedData);
+            <div class="card-icon">
+                📜
+            </div>
+
+            <h3>
+                Transaction History
+            </h3>
+
+            <p>
+                View all your previous account transactions.
+            </p>
+
+            <a href="history.html">
+                View History
+            </a>
+
+        </div>
 
 
-      document
-        .getElementById("usernameDisplay")
+
+        <!-- Profile -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                👤
+            </div>
+
+            <h3>
+                My Profile
+            </h3>
+
+            <p>
+                View and update your personal account information.
+            </p>
+
+            <a href="profile.html">
+                My Profile
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         RECENT TRANSACTIONS
+    ========================== -->
+
+    <div class="transactions">
+
+
+        <div class="transactions-header">
+
+            <h2>
+                Recent Transactions
+            </h2>
+
+
+            <a href="history.html">
+                View All
+            </a>
+
+
+        </div>
+
+
+        <div id="transactionList">
+
+            <div class="empty-message">
+
+                No transactions available.
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- Footer -->
+
+<footer>
+
+    © 2026 Account Funds.
+    All rights reserved.
+
+</footer>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script>
+
+
+    /* =========================
+       LOAD USER NAME
+    ========================== */
+
+    let userName =
+        localStorage.getItem("userName")
+        || "User";
+
+
+    document
+        .getElementById("userName")
         .textContent =
-        userData.username;
-
-    }
+        userName;
 
 
-    // LOGOUT
 
-    function logout() {
+    /* =========================
+       LOAD BALANCE
+    ========================== */
 
-      const confirmLogout =
-        confirm("Are you sure you want to logout?");
+    let balance =
+        localStorage.getItem("balance")
+        || "0";
 
 
-      if (confirmLogout) {
+    document
+        .getElementById("balance")
+        .textContent =
+        "₹" +
+        parseFloat(balance)
+        .toFixed(2);
 
-        localStorage.removeItem(
-          "account_funds_user"
+
+
+    /* =========================
+       LOAD TRANSACTIONS
+    ========================== */
+
+    let transactions =
+        JSON.parse(
+            localStorage.getItem(
+                "transactions"
+            )
+        )
+        || [];
+
+
+    let transactionList =
+        document.getElementById(
+            "transactionList"
         );
 
 
-        window.location.href =
-          "index.html";
+    if (
+        transactions.length > 0
+    ) {
 
-      }
+        transactionList.innerHTML =
+            "";
+
+
+        let recentTransactions =
+            transactions
+            .slice(0, 5);
+
+
+        recentTransactions.forEach(
+            function(transaction) {
+
+
+                let transactionItem =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                transactionItem.className =
+                    "transaction-item";
+
+
+                transactionItem.innerHTML =
+                    `
+
+                    <div class="transaction-left">
+
+                        <div
+                            class="transaction-icon"
+                        >
+                            💰
+                        </div>
+
+
+                        <div>
+
+                            <div
+                                class="transaction-title"
+                            >
+                                ${transaction.title || "Transaction"}
+                            </div>
+
+
+                            <div
+                                class="transaction-date"
+                            >
+                                ${transaction.date || ""}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="amount"
+                    >
+                        + ₹${parseFloat(
+                            transaction.amount || 0
+                        ).toFixed(2)}
+                    </div>
+
+                    `;
+
+
+                transactionList.appendChild(
+                    transactionItem
+                );
+
+
+            }
+        );
+
 
     }
 
 
-    // TEMPORARY BUTTONS
 
-    function comingSoon() {
+    /* =========================
+       LOGOUT
+    ========================== */
 
-      alert(
-        "This feature is coming soon!"
-      );
+    function logout() {
+
+
+        /*
+        Only login session is removed.
+
+        Profile, balance and transactions
+        remain saved in localStorage.
+        */
+
+
+        localStorage.removeItem(
+            "isLoggedIn"
+        );
+
 
     }
 
-  </script>
+
+</script>
+```
 
 </body>
+
 </html>
