@@ -2,990 +2,1149 @@
 
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
 <title>Account Funds</title>
 
 <style>
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --dark: #0f172a;
+    --dark-light: #1e293b;
+    --background: #f1f5f9;
+    --white: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --success: #16a34a;
+    --danger: #dc2626;
+}
 
-    :root {
-        --primary: #2563eb;
-        --primary-dark: #1d4ed8;
-        --dark: #0f172a;
-        --background: #f1f5f9;
-        --white: #ffffff;
-        --text: #0f172a;
-        --muted: #64748b;
-        --border: #e2e8f0;
-        --success: #16a34a;
-        --danger: #dc2626;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-    }
+body {
+    background: var(--background);
+    color: var(--text);
+}
 
-    body {
-        background: var(--background);
-        color: var(--text);
-    }
+button,
+input {
+    font-family: inherit;
+}
 
-    button,
-    input {
-        font-family: inherit;
-    }
+button {
+    cursor: pointer;
+}
 
-    /* ================= NAVBAR ================= */
+/* NAVBAR */
 
-    .navbar {
-        background: var(--dark);
-        color: white;
-        min-height: 70px;
-        padding: 0 8%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+.navbar {
+    background: var(--dark);
+    color: white;
+    min-height: 70px;
+    padding: 12px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
 
-    .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 22px;
-        font-weight: 700;
-    }
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 700;
+}
 
-    .brand-icon {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-        background: var(--primary);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+.brand-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #2563eb, #4338ca);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
 
-    .nav-links button {
-        border: none;
-        background: transparent;
-        color: #cbd5e1;
-        padding: 10px 13px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+.nav-links button {
+    border: none;
+    background: transparent;
+    color: #cbd5e1;
+    padding: 10px 13px;
+    border-radius: 8px;
+    font-size: 14px;
+}
 
-    .nav-links button:hover,
-    .nav-links button.active {
-        color: white;
-        background: rgba(255,255,255,0.1);
-    }
+.nav-links button:hover {
+    color: white;
+    background: rgba(255,255,255,0.1);
+}
 
-    .logout-button {
-        background: var(--danger) !important;
-        color: white !important;
-    }
+.logout-button {
+    background: var(--danger) !important;
+    color: white !important;
+}
 
-    /* ================= PAGES ================= */
+/* PAGES */
 
-    .page {
-        display: none;
-        min-height: calc(100vh - 70px);
-    }
+.page {
+    display: none;
+    min-height: calc(100vh - 70px);
+}
 
-    .page.active {
-        display: block;
-    }
+.page.active {
+    display: block;
+}
 
-    .container {
-        max-width: 1150px;
-        margin: auto;
-        padding: 45px 20px;
-    }
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 45px 20px;
+}
 
-    /* ================= BUTTONS ================= */
+/* BUTTONS */
 
-    .btn {
-        border: none;
-        border-radius: 10px;
-        padding: 13px 20px;
-        cursor: pointer;
-        font-size: 15px;
-        font-weight: 600;
-    }
+.btn {
+    border: none;
+    border-radius: 11px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 700;
+}
 
-    .btn-primary {
-        background: var(--primary);
-        color: white;
-    }
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
 
-    .btn-primary:hover {
-        background: var(--primary-dark);
-    }
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
 
-    .btn-secondary {
-        background: white;
-        color: var(--primary);
-        border: 1px solid var(--border);
-    }
+.btn-secondary {
+    background: white;
+    color: var(--primary);
+    border: 1px solid var(--border);
+}
 
-    /* ================= HOME ================= */
+.full-button {
+    width: 100%;
+}
 
-    .hero {
-        min-height: calc(100vh - 70px);
-        display: flex;
-        align-items: center;
-    }
+/* HOME */
 
-    .hero-grid {
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 50px;
-        align-items: center;
+.hero {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 52px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero p {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+.hero-buttons {
+    margin-top: 28px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.hero-card {
+    background: linear-gradient(145deg, #0f172a, #1e293b);
+    color: white;
+    padding: 32px;
+    border-radius: 22px;
+    box-shadow: 0 20px 45px rgba(15,23,42,0.2);
+}
+
+.hero-card small {
+    color: #94a3b8;
+}
+
+.demo-balance {
+    font-size: 42px;
+    font-weight: 700;
+    margin: 12px 0 30px;
+}
+
+.mini-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: #cbd5e1;
+}
+
+/* CARD + AUTH */
+
+.auth-wrapper {
+    max-width: 460px;
+    margin: auto;
+}
+
+.card,
+.auth-card,
+.section-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.05);
+}
+
+.auth-card h2 {
+    margin-bottom: 8px;
+}
+
+.auth-card > p {
+    color: var(--muted);
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+}
+
+.auth-switch {
+    margin-top: 18px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.text-button {
+    border: none;
+    background: none;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* DASHBOARD */
+
+.page-heading {
+    margin-bottom: 28px;
+}
+
+.page-heading h1 {
+    font-size: 31px;
+    margin-bottom: 8px;
+}
+
+.page-heading p {
+    color: var(--muted);
+}
+
+.balance-card {
+    background: linear-gradient(135deg, #2563eb, #4338ca);
+    color: white;
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 25px;
+}
+
+.balance-card small {
+    opacity: 0.85;
+}
+
+.balance-value {
+    font-size: 44px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.action-card {
+    background: white;
+    padding: 25px;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+}
+
+.action-icon {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.action-card h3 {
+    margin-bottom: 8px;
+}
+
+.action-card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+/* PAYMENT */
+
+.payment-layout {
+    max-width: 650px;
+    margin: auto;
+}
+
+.payment-banner {
+    background: linear-gradient(135deg, #2563eb, #4338ca);
+    color: white;
+    padding: 24px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+}
+
+.payment-banner small {
+    opacity: 0.85;
+}
+
+.banner-amount {
+    font-size: 42px;
+    font-weight: 700;
+    margin-top: 7px;
+}
+
+.payment-summary {
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #fafafa;
+    margin-bottom: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+}
+
+.summary-row span {
+    color: var(--muted);
+}
+
+.amount {
+    color: var(--success);
+    font-weight: 700;
+}
+
+.payment-info {
+    padding: 16px;
+    background: #eff6ff;
+    color: #1e40af;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    width: 100%;
+    margin-top: 14px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: white;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+#paymentMessage {
+    display: none;
+    margin-top: 15px;
+    padding: 14px;
+    border-radius: 10px;
+}
+
+.message-success {
+    display: block !important;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.message-error {
+    display: block !important;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* TRANSACTIONS */
+
+.section-card {
+    margin-top: 25px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.transaction:last-child {
+    border-bottom: none;
+}
+
+.transaction-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.transaction-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background: #eff6ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.transaction small {
+    color: var(--muted);
+}
+
+.empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 35px;
+}
+
+/* PROFILE */
+
+.profile-card {
+    overflow: hidden;
+    border-radius: 18px;
+    background: white;
+    border: 1px solid var(--border);
+}
+
+.profile-header {
+    height: 150px;
+    background: linear-gradient(135deg, #2563eb, #4338ca);
+}
+
+.profile-body {
+    padding: 0 30px 30px;
+}
+
+.profile-user {
+    display: flex;
+    align-items: flex-end;
+    gap: 18px;
+    margin-top: -55px;
+    margin-bottom: 30px;
+}
+
+.avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 5px solid white;
+    background: #e0e7ff;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.profile-user h2 {
+    margin-bottom: 7px;
+}
+
+.profile-user p {
+    color: var(--muted);
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.info-box {
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.info-box small {
+    display: block;
+    color: var(--muted);
+    margin-bottom: 7px;
+}
+
+/* MOBILE */
+
+@media (max-width: 850px) {
+    .hero-grid,
+    .dashboard-grid {
+        grid-template-columns: 1fr;
     }
 
     .hero h1 {
-        font-size: 50px;
-        line-height: 1.15;
-        margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-        color: var(--primary);
-    }
-
-    .hero p {
-        color: var(--muted);
-        line-height: 1.7;
-        font-size: 17px;
-        max-width: 600px;
-    }
-
-    .hero-buttons {
-        margin-top: 28px;
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-    }
-
-    .hero-card {
-        background: var(--dark);
-        color: white;
-        padding: 30px;
-        border-radius: 22px;
-        box-shadow: 0 20px 45px rgba(15,23,42,0.2);
-    }
-
-    .hero-card small {
-        color: #94a3b8;
-    }
-
-    .demo-balance {
         font-size: 40px;
-        margin: 12px 0 30px;
+    }
+}
+
+@media (max-width: 650px) {
+    .navbar {
+        flex-direction: column;
+        padding: 12px 15px;
     }
 
-    .mini-row {
-        display: flex;
-        justify-content: space-between;
-        padding: 15px 0;
-        border-top: 1px solid rgba(255,255,255,0.1);
-        color: #cbd5e1;
-    }
-
-    /* ================= AUTH ================= */
-
-    .auth-wrapper {
-        max-width: 460px;
-        margin: auto;
-        padding-top: 35px;
-    }
-
-    .auth-card,
-    .card {
-        background: white;
-        border: 1px solid var(--border);
-        border-radius: 18px;
-        padding: 28px;
-        box-shadow: 0 10px 30px rgba(15,23,42,0.05);
-    }
-
-    .auth-card h2 {
-        margin-bottom: 8px;
-    }
-
-    .auth-card > p {
-        color: var(--muted);
-        margin-bottom: 25px;
-    }
-
-    .form-group {
-        margin-bottom: 17px;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 14px;
-        font-weight: 600;
-    }
-
-    .form-group input {
-        width: 100%;
-        padding: 13px;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        outline: none;
-        font-size: 15px;
-    }
-
-    .form-group input:focus {
-        border-color: var(--primary);
-    }
-
-    .full-button {
-        width: 100%;
-    }
-
-    .auth-switch {
-        margin-top: 18px;
-        text-align: center;
-        color: var(--muted);
-        font-size: 14px;
-    }
-
-    .text-button {
-        color: var(--primary);
-        border: none;
-        background: none;
-        cursor: pointer;
-        font-weight: 600;
-    }
-
-    /* ================= DASHBOARD ================= */
-
-    .page-heading {
-        margin-bottom: 28px;
-    }
-
-    .page-heading h1 {
-        font-size: 30px;
-        margin-bottom: 8px;
-    }
-
-    .page-heading p {
-        color: var(--muted);
-    }
-
-    .balance-card {
-        background: linear-gradient(135deg, #2563eb, #4338ca);
-        color: white;
-        border-radius: 20px;
-        padding: 30px;
-        margin-bottom: 25px;
-    }
-
-    .balance-card small {
-        opacity: 0.85;
-    }
-
-    .balance-value {
-        font-size: 42px;
-        font-weight: 700;
-        margin-top: 10px;
-    }
-
-    .dashboard-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-
-    .action-card {
-        background: white;
-        padding: 25px;
-        border: 1px solid var(--border);
-        border-radius: 16px;
-    }
-
-    .action-icon {
-        font-size: 32px;
-        margin-bottom: 15px;
-    }
-
-    .action-card h3 {
-        margin-bottom: 8px;
-    }
-
-    .action-card p {
-        color: var(--muted);
-        font-size: 14px;
-        line-height: 1.6;
-        margin-bottom: 18px;
-    }
-
-    /* ================= TRANSACTIONS ================= */
-
-    .section-card {
-        background: white;
-        margin-top: 25px;
-        padding: 25px;
-        border: 1px solid var(--border);
-        border-radius: 16px;
-    }
-
-    .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 18px;
-    }
-
-    .transaction {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 17px 0;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .transaction:last-child {
-        border-bottom: none;
-    }
-
-    .transaction-left {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .transaction-icon {
-        width: 45px;
-        height: 45px;
-        border-radius: 12px;
-        background: #eff6ff;
-        display: flex;
-        align-items: center;
+    .nav-links {
         justify-content: center;
     }
 
-    .transaction small {
-        color: var(--muted);
+    .nav-links button {
+        padding: 8px 9px;
+        font-size: 12px;
     }
 
-    .amount {
-        color: var(--success);
-        font-weight: 700;
+    .container {
+        padding: 30px 15px;
     }
 
-    .empty {
-        text-align: center;
-        color: var(--muted);
-        padding: 35px;
-    }
-
-    /* ================= PROFILE ================= */
-
-    .profile-header {
-        height: 145px;
-        border-radius: 18px 18px 0 0;
-        background: linear-gradient(135deg, #2563eb, #4338ca);
-    }
-
-    .profile-body {
-        padding: 0 30px 30px;
+    .hero h1 {
+        font-size: 33px;
     }
 
     .profile-user {
-        display: flex;
-        align-items: flex-end;
-        gap: 18px;
-        margin-top: -55px;
-        margin-bottom: 30px;
-    }
-
-    .avatar {
-        width: 110px;
-        height: 110px;
-        border-radius: 50%;
-        border: 5px solid white;
-        background: #e0e7ff;
-        color: var(--primary);
-        display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        font-size: 40px;
-        font-weight: 700;
-    }
-
-    .profile-user h2 {
-        margin-bottom: 7px;
-    }
-
-    .profile-user p {
-        color: var(--muted);
+        text-align: center;
     }
 
     .profile-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-        margin-bottom: 28px;
+        grid-template-columns: 1fr;
     }
-
-    .info-box {
-        padding: 18px;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        background: #f8fafc;
-    }
-
-    .info-box small {
-        display: block;
-        color: var(--muted);
-        margin-bottom: 7px;
-    }
-
-    /* ================= RESPONSIVE ================= */
-
-    @media (max-width: 850px) {
-
-        .hero-grid,
-        .dashboard-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .hero h1 {
-            font-size: 38px;
-        }
-
-    }
-
-    @media (max-width: 650px) {
-
-        .navbar {
-            padding: 12px 15px;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .nav-links {
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .nav-links button {
-            padding: 8px 9px;
-            font-size: 12px;
-        }
-
-        .hero h1 {
-            font-size: 32px;
-        }
-
-        .container {
-            padding: 30px 15px;
-        }
-
-        .profile-user {
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .profile-grid {
-            grid-template-columns: 1fr;
-        }
-
-    }
-
+}
 </style>
-```
 
 </head>
 
 <body>
 
-```
-<!-- ================= NAVBAR ================= -->
-
 <nav class="navbar">
 
-    <div class="brand">
-        <div class="brand-icon">₹</div>
-        Account Funds
-    </div>
+```
+<div class="brand">
+    <div class="brand-icon">₹</div>
+    Account Funds
+</div>
 
-    <div class="nav-links">
+<div class="nav-links">
 
-        <button onclick="showPage('home')">
-            Home
-        </button>
+    <button onclick="showPage('home')">Home</button>
 
-        <button onclick="showPage('login')" id="loginNav">
-            Login
-        </button>
+    <button id="loginNav" onclick="showPage('login')">
+        Login
+    </button>
 
-        <button onclick="showPage('register')" id="registerNav">
-            Register
-        </button>
+    <button id="registerNav" onclick="showPage('register')">
+        Register
+    </button>
 
-        <button onclick="showPage('dashboard')" class="user-nav">
-            Dashboard
-        </button>
+    <button class="user-nav" onclick="showPage('dashboard')">
+        Dashboard
+    </button>
 
-        <!-- UPDATED: DIRECT PROFESSIONAL PAYMENT PAGE -->
+    <button class="user-nav" onclick="showPage('payment')">
+        Add Funds
+    </button>
 
-        <button
-            onclick="window.location.href='app.html'"
-            class="user-nav"
-        >
-            Add Funds
-        </button>
+    <button class="user-nav" onclick="showPage('history')">
+        History
+    </button>
 
-        <button onclick="showPage('history')" class="user-nav">
-            History
-        </button>
+    <button class="user-nav" onclick="showPage('profile')">
+        My Profile
+    </button>
 
-        <button onclick="showPage('profile')" class="user-nav">
-            My Profile
-        </button>
+    <button class="user-nav logout-button" onclick="logout()">
+        Logout
+    </button>
 
-        <button onclick="logout()" class="logout-button user-nav">
-            Logout
-        </button>
-
-    </div>
+</div>
+```
 
 </nav>
 
-
-<!-- ================= HOME ================= -->
+<!-- HOME -->
 
 <section class="page active" id="home">
 
-    <div class="container hero">
+```
+<div class="container hero">
 
-        <div class="hero-grid">
+    <div class="hero-grid">
 
-            <div>
-
-                <h1>
-                    Manage your account
-                    <span>simply.</span>
-                </h1>
-
-                <p>
-                    Account Funds provides a simple interface to manage your account,
-                    view your balance, track transactions and update your profile.
-                </p>
-
-                <div class="hero-buttons">
-
-                    <button
-                        class="btn btn-primary"
-                        onclick="showPage('register')"
-                    >
-                        Create Account
-                    </button>
-
-                    <button
-                        class="btn btn-secondary"
-                        onclick="showPage('login')"
-                    >
-                        Login
-                    </button>
-
-                </div>
-
-            </div>
-
-            <div class="hero-card">
-
-                <small>Available Balance</small>
-
-                <div
-                    class="demo-balance"
-                    id="homeBalance"
-                >
-                    ₹0.00
-                </div>
-
-                <div class="mini-row">
-                    <span>Account Status</span>
-                    <strong>Active</strong>
-                </div>
-
-                <div class="mini-row">
-                    <span>Transactions</span>
-                    <strong id="homeTransactionCount">
-                        0
-                    </strong>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= REGISTER ================= -->
-
-<section class="page" id="register">
-
-    <div class="container">
-
-        <div class="auth-wrapper">
-
-            <div class="auth-card">
-
-                <h2>Create Account</h2>
-
-                <p>Create your Account Funds account.</p>
-
-                <form onsubmit="registerUser(event)">
-
-                    <div class="form-group">
-
-                        <label>Full Name</label>
-
-                        <input
-                            type="text"
-                            id="registerName"
-                            required
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>Email Address</label>
-
-                        <input
-                            type="email"
-                            id="registerEmail"
-                            required
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>Password</label>
-
-                        <input
-                            type="password"
-                            id="registerPassword"
-                            required
-                        >
-
-                    </div>
-
-                    <button
-                        class="btn btn-primary full-button"
-                        type="submit"
-                    >
-                        Create Account
-                    </button>
-
-                </form>
-
-                <div class="auth-switch">
-
-                    Already have an account?
-
-                    <button
-                        class="text-button"
-                        onclick="showPage('login')"
-                    >
-                        Login
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= LOGIN ================= -->
-
-<section class="page" id="login">
-
-    <div class="container">
-
-        <div class="auth-wrapper">
-
-            <div class="auth-card">
-
-                <h2>Welcome Back</h2>
-
-                <p>Login to access your dashboard.</p>
-
-                <form onsubmit="loginUser(event)">
-
-                    <div class="form-group">
-
-                        <label>Email Address</label>
-
-                        <input
-                            type="email"
-                            id="loginEmail"
-                            required
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>Password</label>
-
-                        <input
-                            type="password"
-                            id="loginPassword"
-                            required
-                        >
-
-                    </div>
-
-                    <button
-                        class="btn btn-primary full-button"
-                        type="submit"
-                    >
-                        Login
-                    </button>
-
-                </form>
-
-                <div class="auth-switch">
-
-                    New here?
-
-                    <button
-                        class="text-button"
-                        onclick="showPage('register')"
-                    >
-                        Create Account
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= DASHBOARD ================= -->
-
-<section class="page" id="dashboard">
-
-    <div class="container">
-
-        <div class="page-heading">
+        <div>
 
             <h1>
-                Welcome,
-                <span id="dashboardName">User</span>
-                👋
+                Manage your account
+                <span>simply.</span>
             </h1>
 
             <p>
-                Manage your account from one place.
+                Access your account dashboard, profile and transaction
+                history from one simple interface.
             </p>
+
+            <div class="hero-buttons">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="showPage('register')"
+                >
+                    Create Account
+                </button>
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="showPage('login')"
+                >
+                    Login
+                </button>
+
+            </div>
 
         </div>
 
-        <div class="balance-card">
+        <div class="hero-card">
 
-            <small>
-                Available Balance
-            </small>
+            <small>Available Balance</small>
 
-            <div
-                class="balance-value"
-                id="dashboardBalance"
-            >
+            <div class="demo-balance" id="homeBalance">
                 ₹0.00
             </div>
 
-        </div>
-
-
-        <div class="dashboard-grid">
-
-            <div class="action-card">
-
-                <div class="action-icon">
-                    💳
-                </div>
-
-                <h3>Add Funds</h3>
-
-                <p>
-                    Continue to the payment page.
-                </p>
-
-                <!-- UPDATED: DIRECT PROFESSIONAL PAYMENT PAGE -->
-
-                <button
-                    class="btn btn-primary"
-                    onclick="window.location.href='app.html'"
-                >
-                    Add Funds
-                </button>
-
+            <div class="mini-row">
+                <span>Account Status</span>
+                <strong>Active</strong>
             </div>
 
-
-            <div class="action-card">
-
-                <div class="action-icon">
-                    📜
-                </div>
-
-                <h3>Transaction History</h3>
-
-                <p>
-                    View your saved transactions.
-                </p>
-
-                <button
-                    class="btn btn-primary"
-                    onclick="showPage('history')"
-                >
-                    View History
-                </button>
-
+            <div class="mini-row">
+                <span>Transactions</span>
+                <strong id="homeTransactionCount">0</strong>
             </div>
-
-
-            <div class="action-card">
-
-                <div class="action-icon">
-                    👤
-                </div>
-
-                <h3>My Profile</h3>
-
-                <p>
-                    View your account information.
-                </p>
-
-                <button
-                    class="btn btn-primary"
-                    onclick="showPage('profile')"
-                >
-                    My Profile
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="section-card">
-
-            <div class="section-header">
-
-                <h2>
-                    Recent Transactions
-                </h2>
-
-                <button
-                    class="text-button"
-                    onclick="showPage('history')"
-                >
-                    View All
-                </button>
-
-            </div>
-
-            <div id="recentTransactions"></div>
 
         </div>
 
     </div>
 
+</div>
+```
+
 </section>
 
+<!-- REGISTER -->
 
-<!-- ================= HISTORY ================= -->
+<section class="page" id="register">
 
-<section class="page" id="history">
+```
+<div class="container">
 
-    <div class="container">
+    <div class="auth-wrapper">
+
+        <div class="auth-card">
+
+            <h2>Create Account</h2>
+
+            <p>Create your Account Funds account.</p>
+
+            <form onsubmit="registerUser(event)">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="registerName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary full-button"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- LOGIN -->
+
+<section class="page" id="login">
+
+```
+<div class="container">
+
+    <div class="auth-wrapper">
+
+        <div class="auth-card">
+
+            <h2>Welcome Back</h2>
+
+            <p>Login to access your dashboard.</p>
+
+            <form onsubmit="loginUser(event)">
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary full-button"
+                >
+                    Login
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- DASHBOARD -->
+
+<section class="page" id="dashboard">
+
+```
+<div class="container">
+
+    <div class="page-heading">
+
+        <h1>
+            Welcome,
+            <span id="dashboardName">User</span> 👋
+        </h1>
+
+        <p>Manage your account from one place.</p>
+
+    </div>
+
+    <div class="balance-card">
+
+        <small>Available Balance</small>
+
+        <div
+            class="balance-value"
+            id="dashboardBalance"
+        >
+            ₹0.00
+        </div>
+
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="action-card">
+
+            <div class="action-icon">💳</div>
+
+            <h3>Add Funds</h3>
+
+            <p>
+                Continue to the fixed ₹999 payment page.
+            </p>
+
+            <button
+                class="btn btn-primary"
+                onclick="showPage('payment')"
+            >
+                Add Funds ₹999
+            </button>
+
+        </div>
+
+        <div class="action-card">
+
+            <div class="action-icon">📜</div>
+
+            <h3>Transaction History</h3>
+
+            <p>
+                View transactions stored in this browser.
+            </p>
+
+            <button
+                class="btn btn-primary"
+                onclick="showPage('history')"
+            >
+                View History
+            </button>
+
+        </div>
+
+        <div class="action-card">
+
+            <div class="action-icon">👤</div>
+
+            <h3>My Profile</h3>
+
+            <p>
+                View your account information.
+            </p>
+
+            <button
+                class="btn btn-primary"
+                onclick="showPage('profile')"
+            >
+                My Profile
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="section-card">
+
+        <div class="section-header">
+
+            <h2>Recent Transactions</h2>
+
+            <button
+                class="text-button"
+                onclick="showPage('history')"
+            >
+                View All
+            </button>
+
+        </div>
+
+        <div id="recentTransactions"></div>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- PAYMENT -->
+
+<section class="page" id="payment">
+
+```
+<div class="container">
+
+    <div class="payment-layout">
 
         <div class="page-heading">
 
-            <h1>
-                Transaction History
-            </h1>
+            <h1>Add Funds</h1>
 
             <p>
-                Your recent account activity.
+                Complete the ₹999 payment using your preferred UPI app.
             </p>
 
         </div>
 
-        <div class="section-card">
+        <div class="card">
 
-            <div id="allTransactions"></div>
+            <div class="payment-banner">
+
+                <small>Payment Amount</small>
+
+                <div class="banner-amount">
+                    ₹999
+                </div>
+
+            </div>
+
+            <form onsubmit="payNow(event)">
+
+                <div class="form-group">
+
+                    <label>Amount (₹)</label>
+
+                    <input
+                        type="number"
+                        id="paymentAmount"
+                        value="999"
+                        readonly
+                    >
+
+                </div>
+
+                <div class="payment-summary">
+
+                    <div class="summary-row">
+                        <span>Payment Amount</span>
+                        <strong class="amount">₹999</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Payment Method</span>
+                        <strong>UPI</strong>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Status</span>
+                        <strong>Ready for Payment</strong>
+                    </div>
+
+                </div>
+
+                <div class="payment-info">
+
+                    The amount is fixed at <strong>₹999</strong>.
+                    Your device will attempt to open a compatible
+                    UPI application with the payment amount pre-filled.
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary full-button"
+                >
+                    Open UPI App & Pay ₹999
+                </button>
+
+                <button
+                    type="button"
+                    class="back-btn"
+                    onclick="showPage('dashboard')"
+                >
+                    ← Back to Dashboard
+                </button>
+
+                <div id="paymentMessage"></div>
+
+            </form>
 
         </div>
 
     </div>
 
+</div>
+```
+
 </section>
 
+<!-- HISTORY -->
 
-<!-- ================= PROFILE ================= -->
+<section class="page" id="history">
+
+```
+<div class="container">
+
+    <div class="page-heading">
+
+        <h1>Transaction History</h1>
+
+        <p>Transactions saved in this browser.</p>
+
+    </div>
+
+    <div class="section-card">
+
+        <div id="transactionList"></div>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- PROFILE -->
 
 <section class="page" id="profile">
 
-    <div class="container">
+```
+<div class="container">
 
-        <div class="card" style="padding: 0; overflow: hidden;">
+    <div class="profile-card">
 
-            <div class="profile-header"></div>
+        <div class="profile-header"></div>
 
-            <div class="profile-body">
+        <div class="profile-body">
 
-                <div class="profile-user">
+            <div class="profile-user">
 
-                    <div
-                        class="avatar"
-                        id="profileAvatar"
-                    >
-                        U
-                    </div>
+                <div
+                    class="avatar"
+                    id="profileAvatar"
+                >
+                    U
+                </div>
 
-                    <div>
+                <div>
 
-                        <h2 id="profileName">
-                            User
-                        </h2>
+                    <h2 id="profileName">
+                        User
+                    </h2>
 
-                        <p id="profileEmail">
-                          
+                    <p id="profileEmail">
+                        user@example.com
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="profile-grid">
+
+                <div class="info-box">
+
+                    <small>Full Name</small>
+
+                    <strong id="profileNameBox">
+                        User
+                    </strong>
+
+                </div>
+
+                <div class="info-box">
+
+                    <small>Email Address</small>
+
+                    <strong id="profileEmailBox">
+                        user@example.com
+                    </strong>
+
+                </div>
+
+                <div class="info-box">
+
+                    <small>Account Status</small>
+
+                    <strong>Active</strong>
+
+                </div>
+
+                <div class="info-box">
+
+                    <small>Account Balance</small>
+
+                    <strong id="profileBalance">
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<script>
+
+/*
+    SET YOUR UPI ID HERE
+*/
+
+const UPI_ID = "deewuuu01@ptyes";
+
+const UPI_NAME = "Account Funds";
+
+const FI
