@@ -12,7 +12,6 @@
     --primary: #2563eb;
     --primary-dark: #1d4ed8;
     --dark: #0f172a;
-    --dark-light: #1e293b;
     --background: #f1f5f9;
     --white: #ffffff;
     --text: #0f172a;
@@ -210,7 +209,7 @@ button {
     color: #cbd5e1;
 }
 
-/* CARD + AUTH */
+/* CARDS */
 
 .auth-wrapper {
     max-width: 460px;
@@ -264,7 +263,6 @@ button {
     margin-top: 18px;
     text-align: center;
     color: var(--muted);
-    font-size: 14px;
 }
 
 .text-button {
@@ -297,10 +295,6 @@ button {
     margin-bottom: 25px;
 }
 
-.balance-card small {
-    opacity: 0.85;
-}
-
 .balance-value {
     font-size: 44px;
     font-weight: 700;
@@ -331,7 +325,6 @@ button {
 
 .action-card p {
     color: var(--muted);
-    font-size: 14px;
     line-height: 1.6;
     margin-bottom: 18px;
 }
@@ -349,10 +342,6 @@ button {
     padding: 24px;
     border-radius: 16px;
     margin-bottom: 24px;
-}
-
-.payment-banner small {
-    opacity: 0.85;
 }
 
 .banner-amount {
@@ -386,7 +375,6 @@ button {
 
 .amount {
     color: var(--success);
-    font-weight: 700;
 }
 
 .payment-info {
@@ -394,7 +382,6 @@ button {
     background: #eff6ff;
     color: #1e40af;
     border-radius: 12px;
-    font-size: 14px;
     line-height: 1.6;
     margin-bottom: 20px;
 }
@@ -415,12 +402,6 @@ button {
     margin-top: 15px;
     padding: 14px;
     border-radius: 10px;
-}
-
-.message-success {
-    display: block !important;
-    background: #dcfce7;
-    color: #166534;
 }
 
 .message-error {
@@ -448,10 +429,6 @@ button {
     align-items: center;
     padding: 17px 0;
     border-bottom: 1px solid var(--border);
-}
-
-.transaction:last-child {
-    border-bottom: none;
 }
 
 .transaction-left {
@@ -518,10 +495,6 @@ button {
     justify-content: center;
     font-size: 40px;
     font-weight: 700;
-}
-
-.profile-user h2 {
-    margin-bottom: 7px;
 }
 
 .profile-user p {
@@ -600,45 +573,21 @@ button {
 <body>
 
 <nav class="navbar">
+    <div class="brand">
+        <div class="brand-icon">₹</div>
+        Account Funds
+    </div>
 
 ```
-<div class="brand">
-    <div class="brand-icon">₹</div>
-    Account Funds
-</div>
-
 <div class="nav-links">
-
     <button onclick="showPage('home')">Home</button>
-
-    <button id="loginNav" onclick="showPage('login')">
-        Login
-    </button>
-
-    <button id="registerNav" onclick="showPage('register')">
-        Register
-    </button>
-
-    <button class="user-nav" onclick="showPage('dashboard')">
-        Dashboard
-    </button>
-
-    <button class="user-nav" onclick="showPage('payment')">
-        Add Funds
-    </button>
-
-    <button class="user-nav" onclick="showPage('history')">
-        History
-    </button>
-
-    <button class="user-nav" onclick="showPage('profile')">
-        My Profile
-    </button>
-
-    <button class="user-nav logout-button" onclick="logout()">
-        Logout
-    </button>
-
+    <button id="loginNav" onclick="showPage('login')">Login</button>
+    <button id="registerNav" onclick="showPage('register')">Register</button>
+    <button class="user-nav" onclick="showPage('dashboard')">Dashboard</button>
+    <button class="user-nav" onclick="showPage('payment')">Add Funds</button>
+    <button class="user-nav" onclick="showPage('history')">History</button>
+    <button class="user-nav" onclick="showPage('profile')">My Profile</button>
+    <button class="user-nav logout-button" onclick="logout()">Logout</button>
 </div>
 ```
 
@@ -647,51 +596,33 @@ button {
 <!-- HOME -->
 
 <section class="page active" id="home">
+    <div class="container hero">
+        <div class="hero-grid">
 
 ```
-<div class="container hero">
-
-    <div class="hero-grid">
-
         <div>
-
-            <h1>
-                Manage your account
-                <span>simply.</span>
-            </h1>
+            <h1>Manage your account <span>simply.</span></h1>
 
             <p>
-                Access your account dashboard, profile and transaction
-                history from one simple interface.
+                Access your dashboard, profile and transaction history
+                from one simple and professional interface.
             </p>
 
             <div class="hero-buttons">
-
-                <button
-                    class="btn btn-primary"
-                    onclick="showPage('register')"
-                >
+                <button class="btn btn-primary" onclick="showPage('register')">
                     Create Account
                 </button>
 
-                <button
-                    class="btn btn-secondary"
-                    onclick="showPage('login')"
-                >
+                <button class="btn btn-secondary" onclick="showPage('login')">
                     Login
                 </button>
-
             </div>
-
         </div>
 
         <div class="hero-card">
-
             <small>Available Balance</small>
 
-            <div class="demo-balance" id="homeBalance">
-                ₹0.00
-            </div>
+            <div class="demo-balance" id="homeBalance">₹0.00</div>
 
             <div class="mini-row">
                 <span>Account Status</span>
@@ -702,11 +633,9 @@ button {
                 <span>Transactions</span>
                 <strong id="homeTransactionCount">0</strong>
             </div>
-
         </div>
 
     </div>
-
 </div>
 ```
 
@@ -715,16 +644,12 @@ button {
 <!-- REGISTER -->
 
 <section class="page" id="register">
+    <div class="container">
+        <div class="auth-wrapper">
+            <div class="auth-card">
 
 ```
-<div class="container">
-
-    <div class="auth-wrapper">
-
-        <div class="auth-card">
-
             <h2>Create Account</h2>
-
             <p>Create your Account Funds account.</p>
 
             <form onsubmit="registerUser(event)">
@@ -744,19 +669,21 @@ button {
                     <input type="password" id="registerPassword" required>
                 </div>
 
-                <button
-                    type="submit"
-                    class="btn btn-primary full-button"
-                >
+                <button type="submit" class="btn btn-primary full-button">
                     Create Account
                 </button>
 
             </form>
 
+            <div class="auth-switch">
+                Already have an account?
+                <button class="text-button" onclick="showPage('login')">
+                    Login
+                </button>
+            </div>
+
         </div>
-
     </div>
-
 </div>
 ```
 
@@ -765,16 +692,12 @@ button {
 <!-- LOGIN -->
 
 <section class="page" id="login">
+    <div class="container">
+        <div class="auth-wrapper">
+            <div class="auth-card">
 
 ```
-<div class="container">
-
-    <div class="auth-wrapper">
-
-        <div class="auth-card">
-
             <h2>Welcome Back</h2>
-
             <p>Login to access your dashboard.</p>
 
             <form onsubmit="loginUser(event)">
@@ -789,19 +712,14 @@ button {
                     <input type="password" id="loginPassword" required>
                 </div>
 
-                <button
-                    type="submit"
-                    class="btn btn-primary full-button"
-                >
+                <button type="submit" class="btn btn-primary full-button">
                     Login
                 </button>
 
             </form>
 
         </div>
-
     </div>
-
 </div>
 ```
 
@@ -810,112 +728,62 @@ button {
 <!-- DASHBOARD -->
 
 <section class="page" id="dashboard">
+    <div class="container">
 
 ```
-<div class="container">
-
     <div class="page-heading">
-
         <h1>
-            Welcome,
-            <span id="dashboardName">User</span> 👋
+            Welcome, <span id="dashboardName">User</span> 👋
         </h1>
-
         <p>Manage your account from one place.</p>
-
     </div>
 
     <div class="balance-card">
-
         <small>Available Balance</small>
-
-        <div
-            class="balance-value"
-            id="dashboardBalance"
-        >
-            ₹0.00
-        </div>
-
+        <div class="balance-value" id="dashboardBalance">₹0.00</div>
     </div>
 
     <div class="dashboard-grid">
 
         <div class="action-card">
-
             <div class="action-icon">💳</div>
-
             <h3>Add Funds</h3>
-
-            <p>
-                Continue to the fixed ₹999 payment page.
-            </p>
-
-            <button
-                class="btn btn-primary"
-                onclick="showPage('payment')"
-            >
+            <p>Continue to the fixed ₹999 payment page.</p>
+            <button class="btn btn-primary" onclick="showPage('payment')">
                 Add Funds ₹999
             </button>
-
         </div>
 
         <div class="action-card">
-
             <div class="action-icon">📜</div>
-
             <h3>Transaction History</h3>
-
-            <p>
-                View transactions stored in this browser.
-            </p>
-
-            <button
-                class="btn btn-primary"
-                onclick="showPage('history')"
-            >
+            <p>View transactions stored in this browser.</p>
+            <button class="btn btn-primary" onclick="showPage('history')">
                 View History
             </button>
-
         </div>
 
         <div class="action-card">
-
             <div class="action-icon">👤</div>
-
             <h3>My Profile</h3>
-
-            <p>
-                View your account information.
-            </p>
-
-            <button
-                class="btn btn-primary"
-                onclick="showPage('profile')"
-            >
+            <p>View your account information.</p>
+            <button class="btn btn-primary" onclick="showPage('profile')">
                 My Profile
             </button>
-
         </div>
 
     </div>
 
     <div class="section-card">
-
         <div class="section-header">
-
             <h2>Recent Transactions</h2>
 
-            <button
-                class="text-button"
-                onclick="showPage('history')"
-            >
+            <button class="text-button" onclick="showPage('history')">
                 View All
             </button>
-
         </div>
 
         <div id="recentTransactions"></div>
-
     </div>
 
 </div>
@@ -926,47 +794,32 @@ button {
 <!-- PAYMENT -->
 
 <section class="page" id="payment">
+    <div class="container">
+        <div class="payment-layout">
 
 ```
-<div class="container">
-
-    <div class="payment-layout">
-
         <div class="page-heading">
-
             <h1>Add Funds</h1>
-
-            <p>
-                Complete the ₹999 payment using your preferred UPI app.
-            </p>
-
+            <p>Complete the ₹999 payment using your preferred UPI app.</p>
         </div>
 
         <div class="card">
 
             <div class="payment-banner">
-
                 <small>Payment Amount</small>
-
-                <div class="banner-amount">
-                    ₹999
-                </div>
-
+                <div class="banner-amount">₹999</div>
             </div>
 
             <form onsubmit="payNow(event)">
 
                 <div class="form-group">
-
                     <label>Amount (₹)</label>
-
                     <input
                         type="number"
                         id="paymentAmount"
                         value="999"
                         readonly
                     >
-
                 </div>
 
                 <div class="payment-summary">
@@ -989,17 +842,12 @@ button {
                 </div>
 
                 <div class="payment-info">
-
                     The amount is fixed at <strong>₹999</strong>.
-                    Your device will attempt to open a compatible
-                    UPI application with the payment amount pre-filled.
-
+                    Your device will attempt to open a compatible UPI
+                    application with the payment amount pre-filled.
                 </div>
 
-                <button
-                    type="submit"
-                    class="btn btn-primary full-button"
-                >
+                <button type="submit" class="btn btn-primary full-button">
                     Open UPI App & Pay ₹999
                 </button>
 
@@ -1018,7 +866,6 @@ button {
         </div>
 
     </div>
-
 </div>
 ```
 
@@ -1027,22 +874,16 @@ button {
 <!-- HISTORY -->
 
 <section class="page" id="history">
+    <div class="container">
 
 ```
-<div class="container">
-
     <div class="page-heading">
-
         <h1>Transaction History</h1>
-
         <p>Transactions saved in this browser.</p>
-
     </div>
 
     <div class="section-card">
-
         <div id="transactionList"></div>
-
     </div>
 
 </div>
@@ -1053,10 +894,9 @@ button {
 <!-- PROFILE -->
 
 <section class="page" id="profile">
+    <div class="container">
 
 ```
-<div class="container">
-
     <div class="profile-card">
 
         <div class="profile-header"></div>
@@ -1065,23 +905,13 @@ button {
 
             <div class="profile-user">
 
-                <div
-                    class="avatar"
-                    id="profileAvatar"
-                >
+                <div class="avatar" id="profileAvatar">
                     U
                 </div>
 
                 <div>
-
-                    <h2 id="profileName">
-                        User
-                    </h2>
-
-                    <p id="profileEmail">
-                        user@example.com
-                    </p>
-
+                    <h2 id="profileName">User</h2>
+                    <p id="profileEmail">user@example.com</p>
                 </div>
 
             </div>
@@ -1089,49 +919,31 @@ button {
             <div class="profile-grid">
 
                 <div class="info-box">
-
                     <small>Full Name</small>
-
-                    <strong id="profileNameBox">
-                        User
-                    </strong>
-
+                    <strong id="profileNameBox">User</strong>
                 </div>
 
                 <div class="info-box">
-
                     <small>Email Address</small>
-
                     <strong id="profileEmailBox">
                         user@example.com
                     </strong>
-
                 </div>
 
                 <div class="info-box">
-
                     <small>Account Status</small>
-
                     <strong>Active</strong>
-
                 </div>
 
                 <div class="info-box">
-
                     <small>Account Balance</small>
-
-                    <strong id="profileBalance">
-                        ₹0.00
-                    </strong>
-
+                    <strong id="profileBalance">₹0.00</strong>
                 </div>
 
             </div>
 
         </div>
-
     </div>
-
 </div>
 ```
 
@@ -1139,12 +951,76 @@ button {
 
 <script>
 
+/* =========================================
+   CONFIGURATION
+   ========================================= */
+
 /*
-    SET YOUR UPI ID HERE
+   Replace this with your actual UPI ID.
 */
 
-const UPI_ID = "deewuuu01@ptyes";
+const UPI_ID = "YOUR_UPI_ID@bank";
 
 const UPI_NAME = "Account Funds";
 
-const FI
+const FIXED_AMOUNT = 999;
+
+
+/* =========================================
+   STORAGE
+   ========================================= */
+
+let currentUser =
+    JSON.parse(localStorage.getItem("accountFundsUser")) || null;
+
+let balance =
+    Number(localStorage.getItem("accountFundsBalance")) || 0;
+
+let transactions =
+    JSON.parse(
+        localStorage.getItem("accountFundsTransactions")
+    ) || [];
+
+
+/* =========================================
+   NAVIGATION
+   ========================================= */
+
+function showPage(pageId) {
+
+    document.querySelectorAll(".page").forEach(function(page) {
+        page.classList.remove("active");
+    });
+
+    const page =
+        document.getElementById(pageId);
+
+    if (page) {
+        page.classList.add("active");
+    }
+
+    if (
+        ["dashboard", "payment", "history", "profile"]
+        .includes(pageId) &&
+        !currentUser
+    ) {
+        showPage("login");
+        return;
+    }
+
+    updateUI();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================
+   REGISTER
+   ========================================= */
+
+function registerUser(event) {
+
+    even
