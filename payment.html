@@ -1,4 +1,3 @@
-<imh
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +38,6 @@
     .logo {
       width: 65px;
       height: 65px;
-
       margin: 0 auto 15px;
 
       display: flex;
@@ -72,7 +70,6 @@
       border-radius: 20px;
 
       padding: 22px;
-
       margin-bottom: 18px;
     }
 
@@ -84,29 +81,23 @@
     label {
       display: block;
       color: #aab9cc;
-
       font-size: 13px;
-
       margin-bottom: 8px;
     }
 
     input {
       width: 100%;
-
       padding: 14px;
 
       margin-bottom: 18px;
 
       border-radius: 10px;
-
       border: 1px solid #294766;
 
       background: #091321;
-
       color: white;
 
       font-size: 16px;
-
       outline: none;
     }
 
@@ -116,23 +107,16 @@
 
     .pay-btn {
       width: 100%;
-
       padding: 15px;
 
       border: none;
-
       border-radius: 10px;
 
-      background: linear-gradient(
-        135deg,
-        #1976e8,
-        #6046e8
-      );
+      background: linear-gradient(135deg, #1976e8, #6046e8);
 
       color: white;
 
       font-size: 16px;
-
       font-weight: bold;
 
       cursor: pointer;
@@ -143,22 +127,32 @@
     }
 
     .qr-box {
-      width: 240px;
+      width: 270px;
       max-width: 100%;
+
+      min-height: 270px;
 
       margin: 20px auto;
 
       padding: 10px;
 
       background: white;
-
       border-radius: 15px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .qr-box img {
-      width: 100%;
       display: block;
-      border-radius: 8px;
+
+      width: 100%;
+      max-width: 250px;
+
+      height: auto;
+
+      object-fit: contain;
     }
 
     .upi-title {
@@ -169,31 +163,25 @@
 
     .upi-id {
       margin: 10px 0 15px;
-
       padding: 13px;
 
       border-radius: 10px;
 
       background: #091321;
-
       border: 1px solid #294766;
 
       font-size: 16px;
-
       word-break: break-all;
     }
 
     .copy-btn {
       width: 100%;
-
       padding: 13px;
 
       border: 1px solid #2586ff;
-
       border-radius: 10px;
 
       background: transparent;
-
       color: #6eafff;
 
       font-size: 15px;
@@ -203,19 +191,15 @@
 
     .info {
       margin-top: 20px;
-
       padding: 15px;
 
       border-radius: 12px;
 
       background: rgba(25, 118, 232, 0.1);
-
       border: 1px solid rgba(37, 134, 255, 0.25);
 
       color: #b8cce3;
-
       font-size: 13px;
-
       line-height: 1.6;
     }
 
@@ -227,17 +211,14 @@
       padding: 15px;
 
       text-align: center;
-
       text-decoration: none;
 
       border-radius: 12px;
 
       background: #121f32;
-
       border: 1px solid #294766;
 
       color: white;
-
       font-weight: bold;
     }
 
@@ -247,8 +228,15 @@
       margin-top: 15px;
 
       text-align: center;
-
       font-size: 14px;
+    }
+
+    #qrError {
+      display: none;
+      color: #ff7777;
+      text-align: center;
+      font-size: 13px;
+      margin-top: 10px;
     }
 
   </style>
@@ -271,7 +259,7 @@
     </div>
 
 
-    <!-- AMOUNT -->
+    <!-- AMOUNT SECTION -->
 
     <div class="card">
 
@@ -282,11 +270,12 @@
       <input
         type="number"
         id="amount"
-        placeholder="Enter amount">
+        placeholder="Enter amount"
+        min="1">
 
       <button
-        class="pay-btn"
         type="button"
+        class="pay-btn"
         onclick="showPayment()">
 
         Continue to Payment
@@ -298,35 +287,44 @@
     </div>
 
 
-    <!-- QR PAYMENT -->
+    <!-- PAYMENT SECTION -->
 
     <div
       id="paymentSection"
       class="card"
-      style="display:none;">
+      style="display: none;">
 
       <div class="qr-container">
 
         <h2>Scan &amp; Pay</h2>
 
+
+        <!-- QR CODE -->
+
         <div class="qr-box">
-  <img
-    <div class="qr-box">
 
-  <img
-  src="qr.png.jpg"
-  alt="Payment QR Code">
+          <img
+            id="qrImage"
+            src="https://raw.githubusercontent.com/dhsh6162-afk/account_work/main/qr.png.jpg"
+            alt="Payment QR Code"
+            onerror="showQRError()">
 
-</div>
+        </div>
 
-<p id="qrError" style="display:none; color:#ff7777; text-align:center;">
-  QR image load nahi hui. File name aur path check karo.
-</p>
+
+        <p id="qrError">
+
+          QR image load nahi hui. Please refresh the page.
+
+        </p>
 
 
         <p class="upi-title">
+
           UPI ID
+
         </p>
+
 
         <div
           class="upi-id"
@@ -349,10 +347,8 @@
 
         <div class="info">
 
-          Enter the amount, then scan the QR code using
-          your preferred UPI app and complete the payment.
-          Payment confirmation should only be shown after
-          verified confirmation from your payment provider.
+          Amount enter karne ke baad QR code scan karke
+          apne preferred UPI app se payment complete karein.
 
         </div>
 
@@ -360,6 +356,8 @@
 
     </div>
 
+
+    <!-- BACK BUTTON -->
 
     <a
       href="dashboard.html"
@@ -385,6 +383,7 @@
         document
           .getElementById("status");
 
+
       if (!amount || Number(amount) <= 0) {
 
         status.style.color = "#ff7777";
@@ -396,11 +395,20 @@
 
       }
 
+
       status.textContent = "";
+
 
       document
         .getElementById("paymentSection")
         .style.display = "block";
+
+
+      document
+        .getElementById("paymentSection")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
 
     }
 
@@ -413,13 +421,36 @@
           .textContent
           .trim();
 
-      navigator.clipboard
-        .writeText(upi)
-        .then(function () {
 
-          alert("UPI ID copied successfully!");
+      if (navigator.clipboard) {
 
-        });
+        navigator.clipboard
+          .writeText(upi)
+          .then(function () {
+
+            alert("UPI ID copied successfully!");
+
+          });
+
+      } else {
+
+        alert("UPI ID: " + upi);
+
+      }
+
+    }
+
+
+    function showQRError() {
+
+      document
+        .getElementById("qrImage")
+        .style.display = "none";
+
+
+      document
+        .getElementById("qrError")
+        .style.display = "block";
 
     }
 
@@ -427,7 +458,3 @@
 
 </body>
 </html>
-<a href="upi://pay?pa=deewuuu01@ptyes&pn=Deewan%20Chand"
-   class="pay-btn">
-   Open UPI App
-</a>
