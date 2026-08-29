@@ -11,20 +11,24 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Account Funds - Payment</title>
+<title>Account Funds | Secure Payment</title>
 
 <style>
 
     :root {
         --primary: #2563eb;
         --primary-dark: #1d4ed8;
+        --primary-light: #dbeafe;
         --dark: #0f172a;
+        --dark-soft: #1e293b;
         --background: #f1f5f9;
         --white: #ffffff;
         --text: #0f172a;
         --muted: #64748b;
         --border: #e2e8f0;
         --success: #16a34a;
+        --success-light: #dcfce7;
+        --danger: #dc2626;
     }
 
     * {
@@ -35,111 +39,388 @@
     }
 
     body {
-        background: var(--background);
+        background:
+            linear-gradient(
+                180deg,
+                #eaf2ff 0,
+                var(--background) 360px
+            );
         color: var(--text);
+        min-height: 100vh;
     }
 
+    /* ================= NAVBAR ================= */
+
     .navbar {
-        background: var(--dark);
-        color: white;
-        min-height: 70px;
+        width: 100%;
+        min-height: 74px;
         padding: 0 8%;
+        background: rgba(15, 23, 42, 0.98);
+        color: white;
+
         display: flex;
         align-items: center;
+        justify-content: space-between;
+
+        border-bottom: 1px solid
+            rgba(255, 255, 255, 0.08);
     }
 
     .brand {
         display: flex;
         align-items: center;
-        gap: 10px;
-        font-size: 22px;
+        gap: 12px;
+
+        font-size: 21px;
         font-weight: 700;
+        letter-spacing: -0.3px;
     }
 
     .brand-icon {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-        background: var(--primary);
+        width: 42px;
+        height: 42px;
+
+        border-radius: 13px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #3b82f6,
+                #1d4ed8
+            );
+
         display: flex;
         align-items: center;
         justify-content: center;
+
+        font-size: 22px;
+        font-weight: 800;
+
+        box-shadow:
+            0 8px 20px
+            rgba(37, 99, 235, 0.35);
     }
+
+    .nav-status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        font-size: 13px;
+        color: #cbd5e1;
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+
+        border-radius: 50%;
+
+        background: #22c55e;
+
+        box-shadow:
+            0 0 0 4px
+            rgba(34, 197, 94, 0.12);
+    }
+
+    /* ================= MAIN ================= */
 
     .container {
-        max-width: 650px;
-        margin: auto;
-        padding: 45px 20px;
+        width: 100%;
+        max-width: 850px;
+
+        margin: 0 auto;
+
+        padding:
+            48px 20px
+            60px;
     }
 
-    .page-heading {
+    /* ================= HERO ================= */
+
+    .hero-banner {
+        position: relative;
+
+        overflow: hidden;
+
+        padding: 38px;
+
+        border-radius: 24px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #0f172a,
+                #1e3a8a
+            );
+
+        color: white;
+
+        box-shadow:
+            0 22px 50px
+            rgba(15, 23, 42, 0.18);
+
         margin-bottom: 28px;
     }
 
-    .page-heading h1 {
-        font-size: 32px;
-        margin-bottom: 10px;
+    .hero-banner::before {
+        content: "";
+
+        position: absolute;
+
+        width: 260px;
+        height: 260px;
+
+        border-radius: 50%;
+
+        right: -90px;
+        top: -120px;
+
+        background:
+            rgba(59, 130, 246, 0.22);
     }
 
-    .page-heading p {
-        color: var(--muted);
-        line-height: 1.6;
+    .hero-banner::after {
+        content: "";
+
+        position: absolute;
+
+        width: 170px;
+        height: 170px;
+
+        border-radius: 50%;
+
+        left: -70px;
+        bottom: -100px;
+
+        background:
+            rgba(37, 99, 235, 0.18);
     }
 
-    .card {
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+
+        padding:
+            8px 12px;
+
+        border-radius: 999px;
+
+        background:
+            rgba(255, 255, 255, 0.1);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.12);
+
+        color: #dbeafe;
+
+        font-size: 13px;
+
+        margin-bottom: 18px;
+    }
+
+    .badge-icon {
+        font-size: 15px;
+    }
+
+    .hero-banner h1 {
+        font-size: 38px;
+        line-height: 1.15;
+
+        margin-bottom: 12px;
+
+        letter-spacing: -1px;
+    }
+
+    .hero-banner p {
+        max-width: 580px;
+
+        color: #cbd5e1;
+
+        font-size: 15px;
+
+        line-height: 1.7;
+    }
+
+    /* ================= PAYMENT CARD ================= */
+
+    .payment-card {
         background: var(--white);
-        border: 1px solid var(--border);
-        border-radius: 18px;
-        padding: 28px;
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+
+        border:
+            1px solid
+            rgba(226, 232, 240, 0.95);
+
+        border-radius: 22px;
+
+        overflow: hidden;
+
+        box-shadow:
+            0 18px 45px
+            rgba(15, 23, 42, 0.08);
     }
+
+    .card-top {
+        padding:
+            26px 28px
+            22px;
+
+        border-bottom:
+            1px solid
+            var(--border);
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .card-title {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .card-icon {
+        width: 48px;
+        height: 48px;
+
+        border-radius: 14px;
+
+        background:
+            var(--primary-light);
+
+        color:
+            var(--primary);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 23px;
+    }
+
+    .card-title h2 {
+        font-size: 20px;
+        margin-bottom: 4px;
+    }
+
+    .card-title p {
+        font-size: 13px;
+        color: var(--muted);
+    }
+
+    .fixed-badge {
+        padding:
+            8px 12px;
+
+        border-radius: 999px;
+
+        background:
+            #eff6ff;
+
+        color:
+            #1d4ed8;
+
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .card-body {
+        padding: 28px;
+    }
+
+    /* ================= AMOUNT ================= */
 
     .form-group {
-        margin-bottom: 20px;
+        margin-bottom: 24px;
     }
 
     .form-group label {
         display: block;
-        margin-bottom: 8px;
-        font-size: 14px;
-        font-weight: 600;
-    }
 
-    .form-group input {
-        width: 100%;
-        padding: 15px;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        font-size: 18px;
+        margin-bottom: 9px;
+
+        font-size: 14px;
         font-weight: 700;
-        outline: none;
-        background: #f8fafc;
-        color: var(--text);
     }
 
-    .payment-info {
-        margin-bottom: 20px;
-        padding: 15px;
-        border-radius: 10px;
-        background: #eff6ff;
-        color: #1e40af;
-        font-size: 14px;
-        line-height: 1.6;
+    .amount-box {
+        position: relative;
     }
+
+    .currency-symbol {
+        position: absolute;
+
+        left: 18px;
+        top: 50%;
+
+        transform:
+            translateY(-50%);
+
+        font-size: 22px;
+        font-weight: 700;
+
+        color: var(--muted);
+    }
+
+    #paymentAmount {
+        width: 100%;
+
+        padding:
+            17px 18px
+            17px 48px;
+
+        border:
+            1px solid
+            var(--border);
+
+        border-radius: 14px;
+
+        background:
+            #f8fafc;
+
+        font-size: 24px;
+        font-weight: 800;
+
+        color:
+            var(--text);
+
+        outline: none;
+    }
+
+    /* ================= SUMMARY ================= */
 
     .payment-summary {
-        padding: 20px;
-        border: 1px solid var(--border);
-        border-radius: 14px;
+        border:
+            1px solid
+            var(--border);
+
+        border-radius: 16px;
+
+        overflow: hidden;
+
         margin-bottom: 20px;
-        background: #fafafa;
     }
 
     .summary-row {
         display: flex;
         justify-content: space-between;
-        padding: 10px 0;
-        border-bottom: 1px solid var(--border);
+        align-items: center;
+
+        padding:
+            16px 18px;
+
+        border-bottom:
+            1px solid
+            var(--border);
     }
 
     .summary-row:last-child {
@@ -147,75 +428,212 @@
     }
 
     .summary-row span {
-        color: var(--muted);
-    }
+        color:
+            var(--muted);
 
-    .summary-row strong {
-        font-size: 17px;
-    }
-
-    .amount {
-        color: var(--success);
-        font-size: 22px !important;
-    }
-
-    .btn {
-        width: 100%;
-        border: none;
-        border-radius: 10px;
-        padding: 15px 20px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: 700;
-        background: var(--primary);
-        color: white;
-    }
-
-    .btn:hover {
-        background: var(--primary-dark);
-    }
-
-    .secure-text {
-        margin-top: 18px;
-        text-align: center;
-        color: var(--muted);
-        font-size: 13px;
-    }
-
-    #message {
-        display: none;
-        margin-top: 18px;
-        padding: 14px;
-        border-radius: 10px;
         font-size: 14px;
     }
 
+    .summary-row strong {
+        font-size: 15px;
+    }
+
+    .amount {
+        color:
+            var(--success);
+
+        font-size: 22px !important;
+    }
+
+    /* ================= INFO ================= */
+
+    .payment-info {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+
+        padding: 16px;
+
+        border-radius: 14px;
+
+        background:
+            #eff6ff;
+
+        border:
+            1px solid
+            #dbeafe;
+
+        color:
+            #1e40af;
+
+        font-size: 14px;
+
+        line-height: 1.6;
+
+        margin-bottom: 22px;
+    }
+
+    .info-icon {
+        font-size: 19px;
+    }
+
+    /* ================= BUTTON ================= */
+
+    .btn {
+        width: 100%;
+
+        border: none;
+
+        border-radius: 14px;
+
+        padding:
+            17px 20px;
+
+        cursor: pointer;
+
+        font-size: 16px;
+        font-weight: 700;
+
+        color: white;
+
+        background:
+            linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+        box-shadow:
+            0 12px 24px
+            rgba(37, 99, 235, 0.24);
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+        transform:
+            translateY(-1px);
+
+        box-shadow:
+            0 16px 28px
+            rgba(37, 99, 235, 0.3);
+    }
+
+    .btn:active {
+        transform:
+            translateY(0);
+    }
+
+    /* ================= FOOTER INFO ================= */
+
+    .payment-footer {
+        margin-top: 20px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+
+        flex-wrap: wrap;
+
+        color:
+            var(--muted);
+
+        font-size: 12px;
+    }
+
+    .footer-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* ================= MESSAGE ================= */
+
+    #message {
+        display: none;
+
+        margin-top: 18px;
+
+        padding: 15px;
+
+        border-radius: 12px;
+
+        font-size: 14px;
+
+        line-height: 1.5;
+    }
+
     .message-success {
-        background: #dcfce7;
-        color: #166534;
+        background:
+            var(--success-light);
+
+        color:
+            #166534;
+
+        border:
+            1px solid
+            #bbf7d0;
     }
 
     .message-error {
-        background: #fee2e2;
-        color: #991b1b;
+        background:
+            #fee2e2;
+
+        color:
+            #991b1b;
+
+        border:
+            1px solid
+            #fecaca;
     }
 
-    @media (max-width: 600px) {
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 650px) {
 
         .navbar {
-            padding: 15px 20px;
+            padding:
+                14px 20px;
+        }
+
+        .nav-status {
+            display: none;
         }
 
         .container {
-            padding: 30px 15px;
+            padding:
+                28px 15px
+                45px;
         }
 
-        .card {
-            padding: 20px;
+        .hero-banner {
+            padding: 28px 22px;
+            border-radius: 20px;
         }
 
-        .page-heading h1 {
-            font-size: 27px;
+        .hero-banner h1 {
+            font-size: 30px;
+        }
+
+        .card-top {
+            padding:
+                20px;
+        }
+
+        .card-body {
+            padding:
+                20px;
+        }
+
+        .fixed-badge {
+            display: none;
+        }
+
+        .payment-footer {
+            gap: 12px;
         }
 
     }
@@ -228,6 +646,8 @@
 <body>
 
 ```
+<!-- ================= NAVBAR ================= -->
+
 <nav class="navbar">
 
     <div class="brand">
@@ -236,117 +656,248 @@
             ₹
         </div>
 
-        Account Funds
+        <span>
+            Account Funds
+        </span>
+
+    </div>
+
+
+    <div class="nav-status">
+
+        <span class="status-dot"></span>
+
+        Payment page
 
     </div>
 
 </nav>
 
 
+<!-- ================= MAIN ================= -->
+
 <main class="container">
 
-    <div class="page-heading">
 
-        <h1>
-            Add Funds
-        </h1>
+    <!-- ================= BANNER ================= -->
 
-        <p>
-            Complete your payment securely using your preferred UPI application.
-        </p>
+    <section class="hero-banner">
 
-    </div>
+        <div class="hero-content">
 
+            <div class="badge">
 
-    <div class="card">
+                <span class="badge-icon">
+                    💳
+                </span>
 
-        <form id="paymentForm">
-
-            <div class="form-group">
-
-                <label for="paymentAmount">
-                    Amount (₹)
-                </label>
-
-                <input
-                    type="number"
-                    id="paymentAmount"
-                    value="999"
-                    readonly
-                >
+                UPI Payment
 
             </div>
 
 
-            <div class="payment-summary">
-
-                <div class="summary-row">
-
-                    <span>
-                        Payment Amount
-                    </span>
-
-                    <strong class="amount">
-                        ₹999
-                    </strong>
-
-                </div>
+            <h1>
+                Complete your payment
+            </h1>
 
 
-                <div class="summary-row">
-
-                    <span>
-                        Payment Method
-                    </span>
-
-                    <strong>
-                        UPI
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <div class="payment-info">
-
-                The payment amount is fixed at ₹999.
-                After clicking the button below, your UPI application will open with ₹999 pre-filled.
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="btn"
-            >
-                Open UPI App & Pay ₹999
-            </button>
-
-
-            <p class="secure-text">
-
-                Please verify the receiver name and amount inside your UPI application before authorizing payment.
-
+            <p>
+                Review the payment amount below and continue to your preferred UPI application to complete the payment.
             </p>
 
+        </div>
 
-            <div id="message"></div>
+    </section>
 
-        </form>
 
-    </div>
+    <!-- ================= PAYMENT CARD ================= -->
+
+    <section class="payment-card">
+
+
+        <div class="card-top">
+
+            <div class="card-title">
+
+                <div class="card-icon">
+                    ₹
+                </div>
+
+
+                <div>
+
+                    <h2>
+                        Payment Details
+                    </h2>
+
+                    <p>
+                        Fixed amount payment via UPI
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="fixed-badge">
+                ₹999 Fixed
+            </div>
+
+        </div>
+
+
+        <div class="card-body">
+
+
+            <form id="paymentForm">
+
+
+                <!-- AMOUNT -->
+
+                <div class="form-group">
+
+                    <label for="paymentAmount">
+                        Payment Amount
+                    </label>
+
+
+                    <div class="amount-box">
+
+                        <span class="currency-symbol">
+                            ₹
+                        </span>
+
+
+                        <input
+                            type="text"
+                            id="paymentAmount"
+                            value="999"
+                            readonly
+                            aria-label="Fixed payment amount"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUMMARY -->
+
+                <div class="payment-summary">
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Amount
+                        </span>
+
+                        <strong class="amount">
+                            ₹999
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Payment Method
+                        </span>
+
+                        <strong>
+                            UPI
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Status
+                        </span>
+
+                        <strong>
+                            Ready to continue
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- INFO -->
+
+                <div class="payment-info">
+
+                    <div class="info-icon">
+                        ℹ️
+                    </div>
+
+
+                    <div>
+
+                        The payment amount is fixed at <strong>₹999</strong>.
+                        After continuing, your device will attempt to open a compatible UPI application with the amount pre-filled.
+
+                    </div>
+
+                </div>
+
+
+                <!-- PAY BUTTON -->
+
+                <button
+                    type="submit"
+                    class="btn"
+                >
+                    Open UPI App & Pay ₹999
+                </button>
+
+
+                <!-- FOOTER -->
+
+                <div class="payment-footer">
+
+                    <div class="footer-item">
+                        🔒 Verify payment details
+                    </div>
+
+                    <div class="footer-item">
+                        📱 UPI supported
+                    </div>
+
+                    <div class="footer-item">
+                        ₹999 fixed amount
+                    </div>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div id="message"></div>
+
+
+            </form>
+
+        </div>
+
+    </section>
+
 
 </main>
 
+
+<!-- ================= JAVASCRIPT ================= -->
 
 <script>
 
     /*
      * ==========================================
-     * IMPORTANT:
-     * Replace deewuuu01@ptyes with your real UPI ID
-     * Example
+     * PAYMENT CONFIGURATION
      * ==========================================
      */
 
@@ -357,60 +908,112 @@
     const FIXED_AMOUNT = "999";
 
 
+    /*
+     * ==========================================
+     * PAYMENT FORM
+     * ==========================================
+     */
+
     document
         .getElementById("paymentForm")
-        .addEventListener("submit", function (event) {
+        .addEventListener(
+            "submit",
+            function (event) {
 
-            event.preventDefault();
+                event.preventDefault();
 
 
-            if (
-                !UPI_ID ||
-                UPI_ID === "deewuuu01@ptyes"
-            ) {
+                /*
+                 * Check UPI ID
+                 */
+
+                if (
+                    !UPI_ID ||
+                    UPI_ID.trim() === ""
+                ) {
+
+                    showMessage(
+                        "UPI ID is not configured. Please update the UPI_ID value in app.html.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /*
+                 * Create UPI payment URL
+                 */
+
+                const upiUrl =
+                    "upi://pay" +
+                    "?pa=" +
+                    encodeURIComponent(UPI_ID) +
+                    "&pn=" +
+                    encodeURIComponent(UPI_NAME) +
+                    "&am=" +
+                    encodeURIComponent(FIXED_AMOUNT) +
+                    "&cu=INR";
+
+
+                /*
+                 * Show message
+                 */
 
                 showMessage(
-                    "Please set your actual UPI ID in the app.html code first.",
-                    "error"
+                    "Opening your UPI application with ₹999...",
+                    "success"
                 );
 
-                return;
+
+                /*
+                 * Open UPI app
+                 */
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            upiUrl;
+
+                    },
+                    250
+                );
 
             }
+        );
 
 
-            const upiUrl =
-                "upi://pay" +
-                "?pa=" + encodeURIComponent(UPI_ID) +
-                "&pn=" + encodeURIComponent(UPI_NAME) +
-                "&am=" + FIXED_AMOUNT +
-                "&cu=INR";
+    /*
+     * ==========================================
+     * MESSAGE FUNCTION
+     * ==========================================
+     */
 
+    function showMessage(
+        text,
+        type
+    ) {
 
-            showMessage(
-                "Opening your UPI application...",
-                "success"
+        const message =
+            document.getElementById(
+                "message"
             );
 
 
-            window.location.href = upiUrl;
+        message.textContent =
+            text;
 
-        });
-
-
-    function showMessage(text, type) {
-
-        const message =
-            document.getElementById("message");
-
-        message.textContent = text;
 
         message.className =
             type === "success"
                 ? "message-success"
                 : "message-error";
 
-        message.style.display = "block";
+
+        message.style.display =
+            "block";
 
     }
 
@@ -420,3 +1023,4 @@
 </body>
 
 </html>
+
