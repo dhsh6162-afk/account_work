@@ -3,22 +3,193 @@
 <head>
   <meta charset="UTF-8">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Account Funds</title>
 
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #07111f, #142b4a);
+      color: white;
+    }
+
+    .background {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 440px;
+      padding: 32px 24px;
+      background: #0d1828;
+      border: 1px solid #294766;
+      border-radius: 22px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .logo-section {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .logo-circle {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background: linear-gradient(135deg, #1877f2, #7146e8);
+
+      font-size: 23px;
+      font-weight: bold;
+
+      box-shadow: 0 8px 25px rgba(24, 119, 242, 0.35);
+    }
+
+    h1 {
+      font-size: 27px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #9caec4;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .top-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .nav-btn {
+      width: 50%;
+      padding: 13px;
+      border-radius: 10px;
+
+      border: 1px solid #294766;
+      background: #121f32;
+      color: #aebed2;
+
+      font-size: 15px;
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(135deg, #1976e8, #6046e8);
+      color: white;
+      border-color: #2586ff;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    h2 {
+      margin-bottom: 22px;
+      font-size: 21px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+
+      color: #aab9cc;
+      font-size: 13px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+
+      margin-bottom: 18px;
+
+      border-radius: 10px;
+      border: 1px solid #294766;
+
+      background: #091321;
+      color: white;
+
+      outline: none;
+      font-size: 15px;
+    }
+
+    input:focus {
+      border-color: #2586ff;
+    }
+
+    .main-btn {
+      width: 100%;
+      padding: 15px;
+
+      border: none;
+      border-radius: 10px;
+
+      background: linear-gradient(135deg, #1976e8, #6046e8);
+
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+    #message {
+      min-height: 22px;
+      margin-top: 18px;
+
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 480px) {
+
+      .background {
+        padding: 14px;
+        align-items: flex-start;
+      }
+
+      .card {
+        margin-top: 15px;
+        padding: 28px 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+    }
+
+  </style>
 </head>
 
 <body>
 
   <div class="background">
 
-    <!-- MAIN CARD -->
     <div class="card">
 
-      <!-- HEADER -->
       <div class="logo-section">
 
         <div class="logo-circle">
@@ -28,37 +199,39 @@
         <h1>ACCOUNT FUNDS</h1>
 
         <p class="subtitle">
-          LIVE ACTIVATION & EARN COMMISSION
+          LIVE ACTIVATION &amp; EARN COMMISSION
         </p>
 
       </div>
 
 
-      <!-- TOP BUTTONS -->
       <div class="top-buttons">
 
         <button
+          type="button"
+          id="registerTab"
           class="nav-btn active"
           onclick="showSection('register')">
-
           Register
-
         </button>
 
 
         <button
+          type="button"
+          id="loginTab"
           class="nav-btn"
           onclick="showSection('login')">
-
           Login
-
         </button>
 
       </div>
 
 
-      <!-- REGISTER SECTION -->
-      <div id="register" class="section">
+      <!-- REGISTER -->
+
+      <div
+        id="register"
+        class="section">
 
         <h2>Create Your Account</h2>
 
@@ -88,18 +261,20 @@
 
 
         <button
+          type="button"
           class="main-btn"
           onclick="registerUser()">
-
           Register
-
         </button>
 
       </div>
 
 
-      <!-- LOGIN SECTION -->
-      <div id="login" class="section hidden">
+      <!-- LOGIN -->
+
+      <div
+        id="login"
+        class="section hidden">
 
         <h2>Login to Your Account</h2>
 
@@ -121,17 +296,15 @@
 
 
         <button
+          type="button"
           class="main-btn"
           onclick="loginUser()">
-
           Login
-
         </button>
 
       </div>
 
 
-      <!-- MESSAGE -->
       <p id="message"></p>
 
     </div>
@@ -156,49 +329,136 @@
         .getElementById(sectionName)
         .classList.remove("hidden");
 
+
+      document
+        .getElementById("registerTab")
+        .classList.remove("active");
+
+      document
+        .getElementById("loginTab")
+        .classList.remove("active");
+
+
+      if (sectionName === "register") {
+
+        document
+          .getElementById("registerTab")
+          .classList.add("active");
+
+      } else {
+
+        document
+          .getElementById("loginTab")
+          .classList.add("active");
+
+      }
+
+
+      document
+        .getElementById("message")
+        .textContent = "";
+
     }
 
 
     function registerUser() {
 
       const email =
-        document.getElementById("email").value;
+        document
+          .getElementById("email")
+          .value
+          .trim();
 
       const username =
-        document.getElementById("username").value;
+        document
+          .getElementById("username")
+          .value
+          .trim();
 
       const password =
-        document.getElementById("password").value;
+        document
+          .getElementById("password")
+          .value;
 
 
-      if (
-        email === "" ||
-        username.length < 3 ||
-        password.length < 4
-      ) {
+      const message =
+        document
+          .getElementById("message");
 
-        document.getElementById("message").innerHTML =
-          "Please enter valid details.";
+
+      if (!email || !username || !password) {
+
+        message.style.color = "#ff7777";
+
+        message.textContent =
+          "Please fill all details.";
 
         return;
 
       }
 
 
-      localStorage.setItem(
-        "account_username",
-        username
-      );
+      if (username.length < 3) {
+
+        message.style.color = "#ff7777";
+
+        message.textContent =
+          "Username must be at least 3 characters.";
+
+        return;
+
+      }
+
+
+      if (password.length < 4) {
+
+        message.style.color = "#ff7777";
+
+        message.textContent =
+          "Password must be at least 4 characters.";
+
+        return;
+
+      }
+
+
+      const userData = {
+
+        email: email,
+
+        username: username,
+
+        password: password
+
+      };
 
 
       localStorage.setItem(
-        "account_password",
-        password
+
+        "account_funds_user",
+
+        JSON.stringify(userData)
+
       );
 
 
-      document.getElementById("message").innerHTML =
-        "Account created successfully!";
+      message.style.color = "#66d9a6";
+
+      message.textContent =
+        "Account created successfully! Please login.";
+
+
+      setTimeout(function () {
+
+        showSection("login");
+
+
+        document
+          .getElementById("loginUsername")
+          .value = username;
+
+
+      }, 1000);
 
     }
 
@@ -206,41 +466,69 @@
     function loginUser() {
 
       const username =
-        document.getElementById(
-          "loginUsername"
-        ).value;
+        document
+          .getElementById("loginUsername")
+          .value
+          .trim();
+
 
       const password =
-        document.getElementById(
-          "loginPassword"
-        ).value;
+        document
+          .getElementById("loginPassword")
+          .value;
 
 
-      const savedUsername =
+      const message =
+        document
+          .getElementById("message");
+
+
+      const savedData =
         localStorage.getItem(
-          "account_username"
+          "account_funds_user"
         );
 
 
-      const savedPassword =
-        localStorage.getItem(
-          "account_password"
-        );
+      if (!savedData) {
+
+        message.style.color = "#ff7777";
+
+        message.textContent =
+          "No account found. Please register first.";
+
+        return;
+
+      }
+
+
+      const userData =
+        JSON.parse(savedData);
 
 
       if (
-        username === savedUsername &&
-        password === savedPassword
+
+        username === userData.username &&
+
+        password === userData.password
+
       ) {
 
-        document.getElementById("message").innerHTML =
+        message.style.color = "#66d9a6";
+
+        message.textContent =
           "Login successful!";
+
+
+        // Dashboard abhi create nahi hua hai.
+        // Isliye filhaal login success yahin show hoga.
 
       }
 
       else {
 
-        document.getElementById("message").innerHTML =
+        message.style.color = "#ff7777";
+
+        message.textContent =
           "Invalid username or password.";
 
       }
