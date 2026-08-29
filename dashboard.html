@@ -16,39 +16,39 @@
     }
 
     body {
+      min-height: 100vh;
       font-family: Arial, Helvetica, sans-serif;
       background: linear-gradient(135deg, #07111f, #142b4a);
       color: white;
-      min-height: 100vh;
     }
 
     .container {
       width: 100%;
-      max-width: 600px;
+      max-width: 500px;
       margin: auto;
-      padding: 20px 15px;
+      padding: 25px 15px;
     }
 
     .header {
       text-align: center;
-      padding: 25px 0;
+      margin-bottom: 25px;
     }
 
     .logo {
-      width: 65px;
-      height: 65px;
-      margin: auto auto 15px;
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 15px;
 
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
 
       border-radius: 50%;
 
-      font-size: 22px;
-      font-weight: bold;
-
       background: linear-gradient(135deg, #1976e8, #6046e8);
+
+      font-size: 23px;
+      font-weight: bold;
     }
 
     .header h1 {
@@ -59,86 +59,111 @@
     .header p {
       color: #9caec4;
       font-size: 13px;
+      letter-spacing: 1px;
     }
 
-    .welcome-card,
-    .menu-card {
+    .welcome-card {
       background: #0d1828;
       border: 1px solid #294766;
-      border-radius: 18px;
+
+      border-radius: 20px;
       padding: 22px;
+
       margin-bottom: 18px;
     }
 
     .welcome-card h2 {
-      font-size: 20px;
+      font-size: 21px;
       margin-bottom: 10px;
+    }
+
+    #usernameDisplay {
+      color: #6eafff;
     }
 
     .welcome-card p {
       color: #aab9cc;
       font-size: 14px;
+      line-height: 1.6;
     }
 
-    .balance {
-      margin-top: 20px;
-      padding: 18px;
-      border-radius: 14px;
+    .balance-card {
+      background: linear-gradient(135deg, #1976e8, #6046e8);
 
-      background: #091321;
-      border: 1px solid #263f5e;
+      border-radius: 20px;
 
-      text-align: center;
+      padding: 25px;
+      margin-bottom: 20px;
     }
 
-    .balance span {
-      display: block;
-      color: #9caec4;
+    .balance-title {
       font-size: 13px;
+      opacity: 0.85;
       margin-bottom: 8px;
     }
 
-    .balance h2 {
-      font-size: 28px;
-      color: #ffffff;
+    .balance {
+      font-size: 34px;
+      font-weight: bold;
     }
 
-    .menu-title {
-      margin-bottom: 15px;
-      color: #aab9cc;
-      font-size: 13px;
+    .menu-card {
+      background: #0d1828;
+      border: 1px solid #294766;
+
+      border-radius: 20px;
+
+      padding: 12px;
+      margin-bottom: 18px;
     }
 
-    .menu-button {
+    .menu-btn {
       width: 100%;
 
-      display: block;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      padding: 16px;
-      margin-bottom: 12px;
+      padding: 18px;
+
+      margin-bottom: 8px;
 
       text-decoration: none;
-      text-align: center;
 
       border-radius: 12px;
 
-      color: white;
-      font-weight: bold;
+      background: #121f32;
+      border: 1px solid #294766;
 
-      background: linear-gradient(135deg, #1976e8, #6046e8);
+      color: white;
+
+      font-size: 16px;
+
+      cursor: pointer;
     }
 
-    .logout {
+    .menu-btn:last-child {
+      margin-bottom: 0;
+    }
+
+    .menu-btn:hover {
+      border-color: #2586ff;
+    }
+
+    .logout-btn {
       width: 100%;
+
       padding: 15px;
 
-      border: 1px solid #a94444;
+      border: 1px solid #ff5c5c;
+
       border-radius: 12px;
 
       background: transparent;
-      color: #ff8c8c;
 
-      font-size: 15px;
+      color: #ff7777;
+
+      font-size: 16px;
       font-weight: bold;
 
       cursor: pointer;
@@ -159,70 +184,90 @@
 
       <h1>ACCOUNT FUNDS</h1>
 
-      <p>USER DASHBOARD</p>
+      <p>YOUR DASHBOARD</p>
 
     </div>
 
 
+    <!-- WELCOME -->
+
     <div class="welcome-card">
 
-      <h2 id="welcomeText">
-        Welcome
+      <h2>
+        Welcome,
+        <span id="usernameDisplay">User</span> 👋
       </h2>
 
       <p>
-        Manage your account from your dashboard.
+        Welcome to your Account Funds dashboard.
+        Manage your account and payments from here.
       </p>
 
+    </div>
+
+
+    <!-- BALANCE -->
+
+    <div class="balance-card">
+
+      <div class="balance-title">
+        AVAILABLE BALANCE
+      </div>
+
       <div class="balance">
-
-        <span>Account Balance</span>
-
-        <h2>₹0.00</h2>
-
+        ₹0.00
       </div>
 
     </div>
 
 
-    <div class="menu-card">
+    <!-- MENU -->
 
-      <p class="menu-title">
-        ACCOUNT MENU
-      </p>
+    <div class="menu-card">
 
       <a
         href="payment.html"
-        class="menu-button">
+        class="menu-btn">
 
-        Payment / Deposit
+        <span>💳 Deposit / Payment</span>
 
-      </a>
-
-
-      <a
-        href="#"
-        class="menu-button">
-
-        Transaction History
+        <span>›</span>
 
       </a>
 
 
-      <a
-        href="#"
-        class="menu-button">
+      <button
+        class="menu-btn"
+        type="button"
+        onclick="comingSoon()">
 
-        My Profile
+        <span>📜 Transaction History</span>
 
-      </a>
+        <span>›</span>
+
+      </button>
+
+
+      <button
+        class="menu-btn"
+        type="button"
+        onclick="comingSoon()">
+
+        <span>👤 My Profile</span>
+
+        <span>›</span>
+
+      </button>
 
     </div>
 
 
+    <!-- LOGOUT -->
+
     <button
-      class="logout"
-      onclick="logoutUser()">
+      type="button"
+      class="logout-btn"
+      onclick="logout()">
 
       Logout
 
@@ -233,10 +278,10 @@
 
   <script>
 
+    // CHECK LOGIN
+
     const savedData =
-      localStorage.getItem(
-        "account_funds_user"
-      );
+      localStorage.getItem("account_funds_user");
 
 
     if (!savedData) {
@@ -244,35 +289,50 @@
       window.location.href =
         "index.html";
 
-    }
-
-
-    else {
+    } else {
 
       const userData =
         JSON.parse(savedData);
 
 
       document
-        .getElementById(
-          "welcomeText"
-        )
+        .getElementById("usernameDisplay")
         .textContent =
-          "Welcome, " +
-          userData.username;
+        userData.username;
 
     }
 
 
-    function logoutUser() {
+    // LOGOUT
 
-      localStorage.removeItem(
-        "account_funds_user"
+    function logout() {
+
+      const confirmLogout =
+        confirm("Are you sure you want to logout?");
+
+
+      if (confirmLogout) {
+
+        localStorage.removeItem(
+          "account_funds_user"
+        );
+
+
+        window.location.href =
+          "index.html";
+
+      }
+
+    }
+
+
+    // TEMPORARY BUTTONS
+
+    function comingSoon() {
+
+      alert(
+        "This feature is coming soon!"
       );
-
-
-      window.location.href =
-        "index.html";
 
     }
 
