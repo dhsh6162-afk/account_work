@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard - Account Funds</title>
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #07111f, #142b4a);
+      color: white;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px 15px;
+    }
+
+    .header {
+      text-align: center;
+      padding: 25px 0;
+    }
+
+    .logo {
+      width: 65px;
+      height: 65px;
+      margin: auto auto 15px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      font-size: 22px;
+      font-weight: bold;
+
+      background: linear-gradient(135deg, #1976e8, #6046e8);
+    }
+
+    .header h1 {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: #9caec4;
+      font-size: 13px;
+    }
+
+    .welcome-card,
+    .menu-card {
+      background: #0d1828;
+      border: 1px solid #294766;
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .welcome-card h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .welcome-card p {
+      color: #aab9cc;
+      font-size: 14px;
+    }
+
+    .balance {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 14px;
+
+      background: #091321;
+      border: 1px solid #263f5e;
+
+      text-align: center;
+    }
+
+    .balance span {
+      display: block;
+      color: #9caec4;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .balance h2 {
+      font-size: 28px;
+      color: #ffffff;
+    }
+
+    .menu-title {
+      margin-bottom: 15px;
+      color: #aab9cc;
+      font-size: 13px;
+    }
+
+    .menu-button {
+      width: 100%;
+
+      display: block;
+
+      padding: 16px;
+      margin-bottom: 12px;
+
+      text-decoration: none;
+      text-align: center;
+
+      border-radius: 12px;
+
+      color: white;
+      font-weight: bold;
+
+      background: linear-gradient(135deg, #1976e8, #6046e8);
+    }
+
+    .logout {
+      width: 100%;
+      padding: 15px;
+
+      border: 1px solid #a94444;
+      border-radius: 12px;
+
+      background: transparent;
+      color: #ff8c8c;
+
+      font-size: 15px;
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="header">
+
+      <div class="logo">
+        AF
+      </div>
+
+      <h1>ACCOUNT FUNDS</h1>
+
+      <p>USER DASHBOARD</p>
+
+    </div>
+
+
+    <div class="welcome-card">
+
+      <h2 id="welcomeText">
+        Welcome
+      </h2>
+
+      <p>
+        Manage your account from your dashboard.
+      </p>
+
+      <div class="balance">
+
+        <span>Account Balance</span>
+
+        <h2>₹0.00</h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="menu-card">
+
+      <p class="menu-title">
+        ACCOUNT MENU
+      </p>
+
+      <a
+        href="payment.html"
+        class="menu-button">
+
+        Payment / Deposit
+
+      </a>
+
+
+      <a
+        href="#"
+        class="menu-button">
+
+        Transaction History
+
+      </a>
+
+
+      <a
+        href="#"
+        class="menu-button">
+
+        My Profile
+
+      </a>
+
+    </div>
+
+
+    <button
+      class="logout"
+      onclick="logoutUser()">
+
+      Logout
+
+    </button>
+
+  </div>
+
+
+  <script>
+
+    const savedData =
+      localStorage.getItem(
+        "account_funds_user"
+      );
+
+
+    if (!savedData) {
+
+      window.location.href =
+        "index.html";
+
+    }
+
+
+    else {
+
+      const userData =
+        JSON.parse(savedData);
+
+
+      document
+        .getElementById(
+          "welcomeText"
+        )
+        .textContent =
+          "Welcome, " +
+          userData.username;
+
+    }
+
+
+    function logoutUser() {
+
+      localStorage.removeItem(
+        "account_funds_user"
+      );
+
+
+      window.location.href =
+        "index.html";
+
+    }
+
+  </script>
+
+</body>
+</html>
