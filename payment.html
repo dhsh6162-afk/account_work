@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Payment - Account Funds</title>
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #07111f, #142b4a);
+      color: white;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      margin: auto;
+      padding: 25px 15px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .logo {
+      width: 65px;
+      height: 65px;
+
+      margin: 0 auto 15px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background: linear-gradient(135deg, #1976e8, #6046e8);
+
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .header h1 {
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: #9caec4;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .card {
+      background: #0d1828;
+      border: 1px solid #294766;
+
+      border-radius: 20px;
+
+      padding: 22px;
+
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      color: #aab9cc;
+
+      font-size: 13px;
+
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+
+      padding: 14px;
+
+      margin-bottom: 18px;
+
+      border-radius: 10px;
+
+      border: 1px solid #294766;
+
+      background: #091321;
+
+      color: white;
+
+      font-size: 16px;
+
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #2586ff;
+    }
+
+    .pay-btn {
+      width: 100%;
+
+      padding: 15px;
+
+      border: none;
+
+      border-radius: 10px;
+
+      background: linear-gradient(
+        135deg,
+        #1976e8,
+        #6046e8
+      );
+
+      color: white;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+
+    .qr-container {
+      text-align: center;
+    }
+
+    .qr-box {
+      width: 240px;
+      max-width: 100%;
+
+      margin: 20px auto;
+
+      padding: 10px;
+
+      background: white;
+
+      border-radius: 15px;
+    }
+
+    .qr-box img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .upi-title {
+      color: #9caec4;
+      font-size: 13px;
+      margin-top: 15px;
+    }
+
+    .upi-id {
+      margin: 10px 0 15px;
+
+      padding: 13px;
+
+      border-radius: 10px;
+
+      background: #091321;
+
+      border: 1px solid #294766;
+
+      font-size: 16px;
+
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      width: 100%;
+
+      padding: 13px;
+
+      border: 1px solid #2586ff;
+
+      border-radius: 10px;
+
+      background: transparent;
+
+      color: #6eafff;
+
+      font-size: 15px;
+
+      cursor: pointer;
+    }
+
+    .info {
+      margin-top: 20px;
+
+      padding: 15px;
+
+      border-radius: 12px;
+
+      background: rgba(25, 118, 232, 0.1);
+
+      border: 1px solid rgba(37, 134, 255, 0.25);
+
+      color: #b8cce3;
+
+      font-size: 13px;
+
+      line-height: 1.6;
+    }
+
+    .back-btn {
+      width: 100%;
+
+      display: block;
+
+      padding: 15px;
+
+      text-align: center;
+
+      text-decoration: none;
+
+      border-radius: 12px;
+
+      background: #121f32;
+
+      border: 1px solid #294766;
+
+      color: white;
+
+      font-weight: bold;
+    }
+
+    #status {
+      min-height: 20px;
+
+      margin-top: 15px;
+
+      text-align: center;
+
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="header">
+
+      <div class="logo">
+        AF
+      </div>
+
+      <h1>ACCOUNT FUNDS</h1>
+
+      <p>PAYMENT / DEPOSIT</p>
+
+    </div>
+
+
+    <!-- AMOUNT -->
+
+    <div class="card">
+
+      <h2>Enter Amount</h2>
+
+      <label>Amount (₹)</label>
+
+      <input
+        type="number"
+        id="amount"
+        placeholder="Enter amount">
+
+      <button
+        class="pay-btn"
+        type="button"
+        onclick="showPayment()">
+
+        Continue to Payment
+
+      </button>
+
+      <p id="status"></p>
+
+    </div>
+
+
+    <!-- QR PAYMENT -->
+
+    <div
+      id="paymentSection"
+      class="card"
+      style="display:none;">
+
+      <div class="qr-container">
+
+        <h2>Scan &amp; Pay</h2>
+
+        <div class="qr-box">
+
+          <!-- QR IMAGE -->
+          <img
+            src="images/qr.png"
+            alt="UPI Payment QR">
+
+        </div>
+
+
+        <p class="upi-title">
+          UPI ID
+        </p>
+
+        <div
+          class="upi-id"
+          id="upiId">
+
+          deewuuu01@ptyes
+
+        </div>
+
+
+        <button
+          type="button"
+          class="copy-btn"
+          onclick="copyUPI()">
+
+          Copy UPI ID
+
+        </button>
+
+
+        <div class="info">
+
+          Enter the amount, then scan the QR code using
+          your preferred UPI app and complete the payment.
+          Payment confirmation should only be shown after
+          verified confirmation from your payment provider.
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <a
+      href="dashboard.html"
+      class="back-btn">
+
+      ← Back to Dashboard
+
+    </a>
+
+  </div>
+
+
+  <script>
+
+    function showPayment() {
+
+      const amount =
+        document
+          .getElementById("amount")
+          .value;
+
+      const status =
+        document
+          .getElementById("status");
+
+      if (!amount || Number(amount) <= 0) {
+
+        status.style.color = "#ff7777";
+
+        status.textContent =
+          "Please enter a valid amount.";
+
+        return;
+
+      }
+
+      status.textContent = "";
+
+      document
+        .getElementById("paymentSection")
+        .style.display = "block";
+
+    }
+
+
+    function copyUPI() {
+
+      const upi =
+        document
+          .getElementById("upiId")
+          .textContent
+          .trim();
+
+      navigator.clipboard
+        .writeText(upi)
+        .then(function () {
+
+          alert("UPI ID copied successfully!");
+
+        });
+
+    }
+
+  </script>
+
+</body>
+</html>
