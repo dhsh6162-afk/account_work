@@ -309,13 +309,16 @@
         <h2>Scan &amp; Pay</h2>
 
         <div class="qr-box">
+  <img
+    id="qrImage"
+    src="./qr.png"
+    alt="Payment QR Code"
+    onerror="this.style.display='none'; document.getElementById('qrError').style.display='block';">
+</div>
 
-          <!-- QR IMAGE -->
-          <img
-            src="qr.png"
-            alt="UPI Payment QR">
-
-        </div>
+<p id="qrError" style="display:none; color:#ff7777; text-align:center;">
+  QR image load nahi hui. File name aur path check karo.
+</p>
 
 
         <p class="upi-title">
