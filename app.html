@@ -992,5 +992,20 @@
 >
     Pay ₹999
 </button>
+<script>
+function payNow(event) {
+    event.preventDefault();
+
+    const amount = 999;
+
+    const upiId = "deewuuu01@ptyes";
+    const upiName = "Account Funds";
+
+    const upiUrl =
+        `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(upiName)}&am=${amount}&cu=INR`;
+
+    window.location.href = upiUrl;
+}
+</script>
 
                 
